@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist - Keep dist folder for GitHub installs
 dist-ssr
 *.local
 
@@ -24,6 +24,6 @@ dist-ssr
 *.sw?
 
 # Build outputs
-dist/
+# dist/ - Keep dist folder for GitHub installs
 build/
 *.tsbuildinfo

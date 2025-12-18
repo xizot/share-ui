@@ -21,6 +21,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xizot/share-ui.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.lib.json && vite build --mode lib",
