@@ -58,6 +58,7 @@ export * from "./components/ui/tooltip"
 
 // Export utilities
 export { cn } from "./lib/utils"
+export { toast } from "./lib/toast"
 
 // Export hooks
 export * from "./hooks/use-mobile"

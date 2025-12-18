@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Switch } from "@/components/ui/switch"
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "@/lib/toast"
 import { 
   Palette, 
   Type, 
@@ -21,7 +23,9 @@ import {
 
 export function DesignSystem() {
   return (
-    <div className="min-h-screen bg-background p-8">
+    <>
+      <Toaster />
+      <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="space-y-4">
@@ -57,17 +61,17 @@ export function DesignSystem() {
               <Label>Installation</Label>
               <div className="bg-muted p-4 rounded-md font-mono text-sm">
                 <div className="text-muted-foreground mb-2"># npm</div>
-                <div>npm install git+https://github.com/your-username/shared-ui.git</div>
+                <div>npm install git+https://github.com/xizot/share-ui.git</div>
                 <div className="text-muted-foreground mt-4 mb-2"># yarn</div>
-                <div>yarn add git+https://github.com/your-username/shared-ui.git</div>
+                <div>yarn add git+https://github.com/xizot/share-ui.git</div>
                 <div className="text-muted-foreground mt-4 mb-2"># pnpm</div>
-                <div>pnpm add git+https://github.com/your-username/shared-ui.git</div>
+                <div>pnpm add git+https://github.com/xizot/share-ui.git</div>
               </div>
             </div>
             <div className="space-y-2">
               <Label>Usage</Label>
               <div className="bg-muted p-4 rounded-md font-mono text-sm">
-                <div className="text-muted-foreground">import {'{'} Button, Card {'}'} from '@shared-ui'</div>
+                <div className="text-muted-foreground">import {'{'} Button, Card {'}'} from 'shared-ui'</div>
                 <div className="mt-2">
                   <div className="text-muted-foreground">{'<'}</div>
                   <div className="ml-4">{'<'}Button{'>'}Click me{'</'}Button{'>'}</div>
@@ -132,7 +136,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Button {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Button {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Button{'>'}Click me{'</'}Button{'>'}</div>
                       <div>{'<'}Button variant="secondary"{'>'}Secondary{'</'}Button{'>'}</div>
@@ -168,7 +172,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Card{'>'}</div>
                       <div className="ml-2">{'<'}CardHeader{'>'}</div>
@@ -209,7 +213,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Input, Label, Checkbox, Switch {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Input, Label, Checkbox, Switch {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}div className="space-y-2"{'>'}</div>
                       <div className="ml-2">{'<'}Label htmlFor="email"{'>'}Email{'</'}Label{'>'}</div>
@@ -240,7 +244,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Alert, AlertTitle, AlertDescription {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Alert, AlertTitle, AlertDescription {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Alert{'>'}</div>
                       <div className="ml-2">{'<'}AlertTitle{'>'}Title{'</'}AlertTitle{'>'}</div>
@@ -261,7 +265,7 @@ export function DesignSystem() {
                   <div className="space-y-3">
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Dialog{'>'}</div>
                       <div className="ml-2">{'<'}DialogTrigger asChild{'>'}</div>
@@ -275,6 +279,122 @@ export function DesignSystem() {
                       <div className="ml-4">{'<'}p{'>'}Content{'</'}p{'>'}</div>
                       <div className="ml-2">{'</'}DialogContent{'>'}</div>
                       <div>{'</'}Dialog{'>'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Toast */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-semibold">Toast</h3>
+                    <Badge variant="outline">Notification</Badge>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="bg-muted p-4 rounded-md">
+                      <div className="flex flex-wrap gap-2">
+                        <Button 
+                          onClick={() => toast.success('Thành công!', { description: 'Dữ liệu đã được lưu thành công' })}
+                          variant="outline"
+                        >
+                          Success Toast
+                        </Button>
+                        <Button 
+                          onClick={() => toast.error('Có lỗi xảy ra!', { description: 'Vui lòng thử lại sau' })}
+                          variant="outline"
+                        >
+                          Error Toast
+                        </Button>
+                        <Button 
+                          onClick={() => toast.warning('Cảnh báo!', { description: 'Hãy kiểm tra lại thông tin' })}
+                          variant="outline"
+                        >
+                          Warning Toast
+                        </Button>
+                        <Button 
+                          onClick={() => toast.info('Thông tin', { description: 'Đây là thông báo thông tin' })}
+                          variant="outline"
+                        >
+                          Info Toast
+                        </Button>
+                        <Button 
+                          onClick={() => toast.default('Thông báo mặc định', { description: 'Toast mặc định' })}
+                          variant="outline"
+                        >
+                          Default Toast
+                        </Button>
+                        <Button 
+                          onClick={() => {
+                            const id = toast.loading('Đang tải...', { description: 'Vui lòng đợi' })
+                            setTimeout(() => {
+                              toast.dismiss(id)
+                              toast.success('Tải thành công!')
+                            }, 2000)
+                          }}
+                          variant="outline"
+                        >
+                          Loading Toast
+                        </Button>
+                        <Button 
+                          onClick={() => {
+                            toast.promise(
+                              new Promise((resolve) => setTimeout(resolve, 2000)),
+                              {
+                                loading: 'Đang xử lý...',
+                                success: 'Xử lý thành công!',
+                                error: 'Xử lý thất bại!'
+                              }
+                            )
+                          }}
+                          variant="outline"
+                        >
+                          Promise Toast
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="bg-muted p-4 rounded-md font-mono text-sm">
+                      <div className="text-muted-foreground mb-2">// 1. Import components</div>
+                      <div>import {'{'} Toaster {'}'} from 'shared-ui'</div>
+                      <div>import {'{'} toast {'}'} from 'shared-ui'</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// 2. Setup Toaster in your root component (App.tsx or main.tsx)</div>
+                      <div>function App() {'{'}</div>
+                      <div className="ml-2">return (</div>
+                      <div className="ml-4">{'<'}div{'>'}</div>
+                      <div className="ml-6">{'<'}Toaster /&gt;</div>
+                      <div className="ml-6">{'<'}YourAppContent /&gt;</div>
+                      <div className="ml-4">{'</'}div{'>'}</div>
+                      <div className="ml-2">)</div>
+                      <div>{'}'}</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// Note: Toaster requires ThemeProvider if using dark mode</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// If using next-themes, wrap your app:</div>
+                      <div>{'<'}ThemeProvider attribute="class" defaultTheme="system"{'>'}</div>
+                      <div className="ml-2">{'<'}Toaster /&gt;</div>
+                      <div className="ml-2">{'<'}YourAppContent /&gt;</div>
+                      <div>{'</'}ThemeProvider{'>'}</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// 3. Usage in any component</div>
+                      <div>toast.success('Thành công!')</div>
+                      <div>toast.error('Có lỗi xảy ra!')</div>
+                      <div>toast.warning('Cảnh báo!')</div>
+                      <div>toast.info('Thông tin')</div>
+                      <div>toast.default('Thông báo mặc định')</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// With description and options</div>
+                      <div>toast.success('Thành công!', {'{'}</div>
+                      <div className="ml-2">description: 'Dữ liệu đã được lưu',</div>
+                      <div className="ml-2">duration: 5000</div>
+                      <div>{'}'})</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// Promise toast (loading -&gt; success/error)</div>
+                      <div>toast.promise(</div>
+                      <div className="ml-2">fetchData(),</div>
+                      <div className="ml-2">{'{'}</div>
+                      <div className="ml-4">loading: 'Đang tải...',</div>
+                      <div className="ml-4">success: 'Tải thành công!',</div>
+                      <div className="ml-4">error: 'Tải thất bại!'</div>
+                      <div className="ml-2">{'}'}</div>
+                      <div>)</div>
+                      <div className="text-muted-foreground mt-4 mb-2">// Dismiss toasts programmatically</div>
+                      <div>toast.dismiss() // Dismiss all</div>
+                      <div>toast.dismiss(toastId) // Dismiss specific toast</div>
                     </div>
                   </div>
                 </div>
@@ -300,7 +420,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Tabs, TabsList, TabsTrigger, TabsContent {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Tabs, TabsList, TabsTrigger, TabsContent {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Tabs defaultValue="tab1"{'>'}</div>
                       <div className="ml-2">{'<'}TabsList{'>'}</div>
@@ -333,7 +453,7 @@ export function DesignSystem() {
                     </div>
                     <div className="bg-muted p-4 rounded-md font-mono text-sm">
                       <div className="text-muted-foreground mb-2">// Import</div>
-                      <div>import {'{'} Badge {'}'} from '@shared-ui'</div>
+                      <div>import {'{'} Badge {'}'} from 'shared-ui'</div>
                       <div className="text-muted-foreground mt-4 mb-2">// Usage</div>
                       <div>{'<'}Badge{'>'}Default{'</'}Badge{'>'}</div>
                       <div>{'<'}Badge variant="secondary"{'>'}Secondary{'</'}Badge{'>'}</div>
@@ -351,7 +471,7 @@ export function DesignSystem() {
                   </div>
                   <div className="bg-muted p-4 rounded-md font-mono text-sm whitespace-pre-wrap">
                     <div className="text-muted-foreground mb-2">// Import</div>
-                    <div>import {'{'} Form, FormField, FormItem, FormLabel, FormControl, FormMessage {'}'} from '@shared-ui'</div>
+                    <div>import {'{'} Form, FormField, FormItem, FormLabel, FormControl, FormMessage {'}'} from 'shared-ui'</div>
                     <div className="text-muted-foreground mt-4 mb-2">// Usage with react-hook-form</div>
                     <div>{`const form = useForm<formValues>()
 
@@ -680,7 +800,7 @@ export function DesignSystem() {
                 Import only the components you need. The library is tree-shakeable, so unused components won't be included in your bundle.
               </p>
               <div className="bg-muted p-3 rounded-md font-mono text-sm">
-                import {'{'} Button, Card {'}'} from '@shared-ui'
+                import {'{'} Button, Card {'}'} from 'shared-ui'
               </div>
             </div>
 
@@ -736,6 +856,7 @@ export function DesignSystem() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

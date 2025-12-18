@@ -12,8 +12,8 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 197 64% 34%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
@@ -46,8 +46,8 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 197 64% 50%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -152,8 +152,8 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+    --primary: oklch(0.4 0.13 197);
+    --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -186,8 +186,8 @@
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
+    --primary: oklch(0.55 0.13 197);
+    --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
@@ -219,5 +219,104 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Toast Custom Styling - AAA Contrast Compliant */
+@layer components {
+  [data-sonner-toast] {
+    @apply border-2 shadow-lg;
+  }
+
+  [data-sonner-toast][data-type="success"] {
+    @apply bg-green-50 text-green-950 border-green-700;
+  }
+
+  [data-sonner-toast][data-type="success"] [data-description],
+  [data-sonner-toast][data-type="success"] .description {
+    @apply text-green-900;
+    color: rgb(20 83 45) !important; /* green-900 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="success"].dark,
+  .dark [data-sonner-toast][data-type="success"] {
+    @apply bg-green-950 text-green-50 border-green-600;
+  }
+
+  .dark [data-sonner-toast][data-type="success"] [data-description],
+  [data-sonner-toast][data-type="success"].dark [data-description],
+  .dark [data-sonner-toast][data-type="success"] .description,
+  [data-sonner-toast][data-type="success"].dark .description {
+    @apply text-green-100;
+    color: rgb(220 252 231) !important; /* green-100 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="error"] {
+    @apply bg-red-50 text-red-950 border-red-700;
+  }
+
+  [data-sonner-toast][data-type="error"] [data-description],
+  [data-sonner-toast][data-type="error"] .description {
+    @apply text-red-900;
+    color: rgb(127 29 29) !important; /* red-900 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="error"].dark,
+  .dark [data-sonner-toast][data-type="error"] {
+    @apply bg-red-950 text-red-50 border-red-600;
+  }
+
+  .dark [data-sonner-toast][data-type="error"] [data-description],
+  [data-sonner-toast][data-type="error"].dark [data-description],
+  .dark [data-sonner-toast][data-type="error"] .description,
+  [data-sonner-toast][data-type="error"].dark .description {
+    @apply text-red-100;
+    color: rgb(254 226 226) !important; /* red-100 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="warning"] {
+    @apply bg-amber-50 text-amber-950 border-amber-700;
+  }
+
+  [data-sonner-toast][data-type="warning"] [data-description],
+  [data-sonner-toast][data-type="warning"] .description {
+    @apply text-amber-900;
+    color: rgb(120 53 15) !important; /* amber-900 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="warning"].dark,
+  .dark [data-sonner-toast][data-type="warning"] {
+    @apply bg-amber-950 text-amber-50 border-amber-600;
+  }
+
+  .dark [data-sonner-toast][data-type="warning"] [data-description],
+  [data-sonner-toast][data-type="warning"].dark [data-description],
+  .dark [data-sonner-toast][data-type="warning"] .description,
+  [data-sonner-toast][data-type="warning"].dark .description {
+    @apply text-amber-100;
+    color: rgb(254 243 199) !important; /* amber-100 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="info"] {
+    @apply bg-blue-50 text-blue-950 border-blue-700;
+  }
+
+  [data-sonner-toast][data-type="info"] [data-description],
+  [data-sonner-toast][data-type="info"] .description {
+    @apply text-blue-900;
+    color: rgb(30 58 138) !important; /* blue-900 for AAA contrast */
+  }
+
+  [data-sonner-toast][data-type="info"].dark,
+  .dark [data-sonner-toast][data-type="info"] {
+    @apply bg-blue-950 text-blue-50 border-blue-600;
+  }
+
+  .dark [data-sonner-toast][data-type="info"] [data-description],
+  [data-sonner-toast][data-type="info"].dark [data-description],
+  .dark [data-sonner-toast][data-type="info"] .description,
+  [data-sonner-toast][data-type="info"].dark .description {
+    @apply text-blue-100;
+    color: rgb(219 234 254) !important; /* blue-100 for AAA contrast */
   }
 }

@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
 
 function Command({
   className,
@@ -60,22 +61,60 @@ function CommandDialog({
 
 function CommandInput({
   className,
+  label,
+  error,
+  required,
+  id,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Input>) {
-  return (
+}: React.ComponentProps<typeof CommandPrimitive.Input> & {
+  label?: string | React.ReactNode
+  error?: string
+  required?: boolean
+}) {
+  const inputId = id || React.useId()
+  const hasLabelOrError = label || error
+
+  const inputWrapper = (
     <div
       data-slot="command-input-wrapper"
-      className="flex h-9 items-center gap-2 border-b px-3"
+      className={cn(
+        "flex h-9 items-center gap-2 border-b px-3",
+        error && "border-destructive"
+      )}
     >
       <SearchIcon className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
+        id={inputId}
         data-slot="command-input"
+        aria-invalid={!!error}
         className={cn(
           "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+          error && "focus-visible:ring-destructive",
           className
         )}
         {...props}
       />
+    </div>
+  )
+
+  if (!hasLabelOrError) {
+    return inputWrapper
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      {label && (
+        <Label htmlFor={inputId}>
+          {label}
+          {required && <span className="text-destructive">*</span>}
+        </Label>
+      )}
+      {inputWrapper}
+      {error && (
+        <div className="text-destructive text-sm" role="alert">
+          {error}
+        </div>
+      )}
     </div>
   )
 }

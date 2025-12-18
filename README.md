@@ -18,13 +18,13 @@ A comprehensive React component library built with [shadcn/ui](https://ui.shadcn
 
 ```bash
 # npm
-npm install git+https://github.com/your-username/shared-ui.git
+npm install git+https://github.com/xizot/share-ui.git
 
 # yarn
-yarn add git+https://github.com/your-username/shared-ui.git
+yarn add git+https://github.com/xizot/share-ui.git
 
 # pnpm
-pnpm add git+https://github.com/your-username/shared-ui.git
+pnpm add git+https://github.com/xizot/share-ui.git
 ```
 
 ### Setup in Your Project
@@ -33,30 +33,30 @@ This library uses **Tailwind CSS v4**. The CSS is already bundled, but you need 
 
 1. **If your project uses Tailwind CSS v4**:
    - No additional setup needed! The styles are bundled with the library.
-   - Import the styles if needed: `import '@shared-ui/styles'`
+   - Import the styles if needed: `import 'shared-ui/styles'`
 
 2. **If your project uses Tailwind CSS v3**:
    - You may need to upgrade to v4, or
-   - Copy the CSS variables from `@shared-ui/src/index.css` to your project's CSS file
+   - Copy the CSS variables from `shared-ui/src/index.css` to your project's CSS file
    - Update your `tailwind.config.js` to include the library:
    ```js
    module.exports = {
      content: [
        "./src/**/*.{js,ts,jsx,tsx}",
-       "./node_modules/@shared-ui/dist/**/*.{js,mjs}", // Add this
+       "./node_modules/shared-ui/dist/**/*.{js,mjs}", // Add this
      ],
      // ... rest of your config
    }
    ```
 
-3. **CSS Variables**: The library uses CSS variables for theming. Make sure your project has the same CSS variables defined, or copy them from `@shared-ui/src/index.css`.
+3. **CSS Variables**: The library uses CSS variables for theming. Make sure your project has the same CSS variables defined, or copy them from `shared-ui/src/index.css`.
 
 ## Usage
 
 ### Basic Example
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from '@shared-ui'
+import { Button, Card, CardHeader, CardTitle, CardContent } from 'shared-ui'
 
 function App() {
   return (
@@ -75,15 +75,15 @@ function App() {
 ### Import Specific Components
 
 ```tsx
-import { Button } from '@shared-ui'
-import { Card, CardHeader, CardTitle } from '@shared-ui'
-import { Input, Label } from '@shared-ui'
+import { Button } from 'shared-ui'
+import { Card, CardHeader, CardTitle } from 'shared-ui'
+import { Input, Label } from 'shared-ui'
 ```
 
 ### Using Utilities
 
 ```tsx
-import { cn } from '@shared-ui'
+import { cn } from 'shared-ui'
 
 // Merge Tailwind classes
 const className = cn("base-class", condition && "conditional-class")
@@ -161,7 +161,7 @@ const className = cn("base-class", condition && "conditional-class")
 
 ## Customization
 
-All components are located in `node_modules/@shared-ui/src/components/ui/`. You can:
+All components are located in `node_modules/shared-ui/src/components/ui/`. You can:
 
 1. **Copy components to your project** and modify them
 2. **Override styles** using Tailwind classes
