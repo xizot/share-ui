@@ -38,12 +38,11 @@ function SelectTrigger({
   error?: string
   required?: boolean
 }) {
-  const triggerId = id || React.useId()
   const hasLabelOrError = label || error
 
   const triggerElement = (
     <SelectPrimitive.Trigger
-      id={triggerId}
+      id={id}
       data-slot="select-trigger"
       data-size={size}
       aria-invalid={!!error}
@@ -71,7 +70,7 @@ function SelectTrigger({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <Label htmlFor={triggerId}>
+        <Label htmlFor={id}>
           {label}
           {required && <span className="text-destructive">*</span>}
         </Label>

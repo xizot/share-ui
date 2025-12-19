@@ -38,7 +38,7 @@ function CommandDialog({
 }: React.ComponentProps<typeof Dialog> & {
   title?: string
   description?: string
-  className?: string
+  className?: React.ComponentProps<typeof DialogContent>['className']
   showCloseButton?: boolean
 }) {
   return (
@@ -71,7 +71,6 @@ function CommandInput({
   error?: string
   required?: boolean
 }) {
-  const inputId = id || React.useId()
   const hasLabelOrError = label || error
 
   const inputWrapper = (
@@ -84,7 +83,7 @@ function CommandInput({
     >
       <SearchIcon className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
-        id={inputId}
+        id={id}
         data-slot="command-input"
         aria-invalid={!!error}
         className={cn(
@@ -104,7 +103,7 @@ function CommandInput({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <Label htmlFor={inputId}>
+        <Label htmlFor={id}>
           {label}
           {required && <span className="text-destructive">*</span>}
         </Label>

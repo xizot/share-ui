@@ -7,8 +7,11 @@ import { ClassProp } from 'class-variance-authority/types';
 import { ClassValue } from 'clsx';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import { Command as Command_2 } from 'cmdk';
+import { ComponentProps } from 'react';
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
+import { Control } from 'react-hook-form';
 import { ControllerProps } from 'react-hook-form';
+import { DateRange } from 'react-day-picker';
 import { DayButton } from 'react-day-picker';
 import { DayPicker } from 'react-day-picker';
 import { default as default_2 } from 'embla-carousel-react';
@@ -17,6 +20,7 @@ import { Drawer as Drawer_2 } from 'vaul';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { FieldError as FieldError_2 } from 'react-hook-form';
 import { FieldPath } from 'react-hook-form';
+import { FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form';
 import { FormProviderProps } from 'react-hook-form';
 import { Group } from 'react-resizable-panels';
@@ -27,6 +31,7 @@ import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { OTPInput } from 'input-otp';
 import { Panel } from 'react-resizable-panels';
+import { Path } from 'react-hook-form';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
@@ -45,6 +50,7 @@ import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import * as TogglePrimitive from '@radix-ui/react-toggle';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { UseEmblaCarouselType } from 'embla-carousel-react';
+import { UseFormRegister } from 'react-hook-form';
 import { VariantProps } from 'class-variance-authority';
 
 export declare function Accordion({ ...props }: React_2.ComponentProps<typeof AccordionPrimitive.Root>): JSX.Element;
@@ -231,12 +237,39 @@ export declare function CollapsibleContent({ ...props }: React.ComponentProps<ty
 
 export declare function CollapsibleTrigger({ ...props }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>): JSX.Element;
 
+export declare function Combobox({ options, value, onChange, label, error, required, placeholder, searchPlaceholder, emptyMessage, disabled, className, triggerClassName, popoverClassName, }: ComboboxProps): JSX.Element;
+
+export declare type ComboboxBaseOption = ComboboxOption;
+
+export declare type ComboboxOption = {
+    id: string | number;
+    code?: string;
+    name: string;
+    disabled?: boolean;
+};
+
+declare type ComboboxProps = {
+    options: ComboboxOption[];
+    value?: string | number;
+    onChange?: (value: string | number, option: ComboboxOption | undefined) => void;
+    label?: string | React_2.ReactNode;
+    error?: string;
+    required?: boolean;
+    placeholder?: string;
+    searchPlaceholder?: string;
+    emptyMessage?: string;
+    disabled?: boolean;
+    className?: ComponentProps<'div'>['className'];
+    triggerClassName?: ComponentProps<typeof Button>['className'];
+    popoverClassName?: ComponentProps<typeof PopoverContent>['className'];
+};
+
 export declare function Command({ className, ...props }: React_2.ComponentProps<typeof Command_2>): JSX.Element;
 
 export declare function CommandDialog({ title, description, children, className, showCloseButton, ...props }: React_2.ComponentProps<typeof Dialog> & {
     title?: string;
     description?: string;
-    className?: string;
+    className?: React_2.ComponentProps<typeof DialogContent>['className'];
     showCloseButton?: boolean;
 }): JSX.Element;
 
@@ -423,6 +456,8 @@ declare const fieldVariants: (props?: ({
 } & ClassProp) | undefined) => string;
 
 export declare const Form: <TFieldValues extends FieldValues, TContext = any, TTransformedValues = TFieldValues>(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) => React_2.JSX.Element;
+
+declare type FormatType = 'text' | 'integer' | 'decimal' | 'currency';
 
 export declare function FormControl({ ...props }: React_2.ComponentProps<typeof Slot>): JSX.Element;
 
@@ -618,6 +653,119 @@ export declare function ResizableHandle({ withHandle, className, ...props }: Rea
 export declare function ResizablePanel({ ...props }: React_2.ComponentProps<typeof Panel>): JSX.Element;
 
 export declare function ResizablePanelGroup({ className, ...props }: React_2.ComponentProps<typeof Group>): JSX.Element;
+
+export declare function RHFCombobox<T extends FieldValues = FieldValues>({ control, name, label, required, callback, className, ...comboboxProps }: RHFComboboxProps<T>): JSX.Element;
+
+declare type RHFComboboxProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Combobox>, 'value' | 'onChange' | 'label' | 'error' | 'required'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    required?: boolean;
+    callback?: (newValue: string | number, newOption: ComboboxOption | undefined) => void;
+};
+
+export declare function RHFDatePicker<T extends FieldValues = FieldValues>({ control, name, label, placeholder, required, error, disabled, disabledPast, disabledFuture, onDisabled, className, callback, ...calendarProps }: RHFDatePickerProps<T>): JSX.Element;
+
+declare type RHFDatePickerProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Calendar>, 'selected' | 'onSelect' | 'mode'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    placeholder?: string;
+    required?: boolean;
+    error?: string;
+    disabled?: boolean;
+    disabledPast?: boolean;
+    disabledFuture?: boolean;
+    onDisabled?: (date: Date) => boolean;
+    className?: ComponentProps<'div'>['className'];
+    callback?: (value: Date | undefined) => void;
+};
+
+export declare function RHFDateRangePicker<T extends FieldValues = FieldValues>({ control, name, label, placeholder, required, error, disabled, disabledPast, disabledFuture, onDisabled, className, callback, ...calendarProps }: RHFDateRangePickerProps<T>): JSX.Element;
+
+declare type RHFDateRangePickerProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Calendar>, 'selected' | 'onSelect' | 'mode'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    placeholder?: {
+        from?: string;
+        to?: string;
+    };
+    required?: boolean;
+    error?: string;
+    disabled?: boolean;
+    disabledPast?: boolean;
+    disabledFuture?: boolean;
+    onDisabled?: (date: Date) => boolean;
+    className?: ComponentProps<'div'>['className'];
+    callback?: (value: DateRange | undefined) => void;
+};
+
+export declare const RHFErrorMessage: <T extends FieldValues = FieldValues>({ name, control, }: RHFErrorMessageProps<T>) => JSX.Element;
+
+declare type RHFErrorMessageProps<T extends FieldValues> = {
+    name: Path<T>;
+    control: Control<T>;
+    showErrorWithTooltip?: boolean;
+};
+
+export declare function RHFFormattedInput<T extends FieldValues = FieldValues>({ control, name, label, format, required, wrapperClassName, callback, ...inputProps }: RHFFormattedInputProps<T>): JSX.Element;
+
+declare type RHFFormattedInputProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Input>, 'value' | 'onChange' | 'type' | 'label' | 'error' | 'required'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    format?: FormatType;
+    required?: boolean;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    callback?: (value: string) => void;
+};
+
+export declare function RHFInput<T extends FieldValues = FieldValues>({ control, register, name, label, placeholder, className, wrapperClassName, required, ...rest }: RHFInputProps<T>): JSX.Element;
+
+declare type RHFInputProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Input>, 'label' | 'error' | 'required'> & {
+    control: Control<T>;
+    name: Path<T>;
+    register: UseFormRegister<T>;
+    label?: string;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    required?: boolean;
+};
+
+export declare function RHFRadioGroup<T extends FieldValues = FieldValues>({ control, name, label, required, children, className, callback, onBeforeChange, ...radioGroupProps }: RHFRadioGroupProps<T>): JSX.Element;
+
+declare type RHFRadioGroupProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof RadioGroup>, 'onValueChange' | 'value'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    required?: boolean;
+    children: React.ReactNode;
+    onBeforeChange?: (newValue: string, currentValue: FieldPathValue<T, Path<T>>, onNextAction: () => void) => void;
+    callback?: (newValue: string) => void;
+};
+
+export declare function RHFSwitch<T extends FieldValues = FieldValues>({ control, name, label, required, callback, onBeforeChange, className, ...switchProps }: RHFSwitchProps<T>): JSX.Element;
+
+declare type RHFSwitchProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Switch>, 'checked' | 'onCheckedChange'> & {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    required?: boolean;
+    onBeforeChange?: (newValue: boolean, currentValue: FieldPathValue<T, Path<T>>, onNextAction: () => void) => void;
+    callback?: (newValue: boolean) => void;
+};
+
+export declare function RHFTextarea<T extends FieldValues = FieldValues>({ control, register, name, label, placeholder, className, wrapperClassName, required, showMaxLength, maxLength, rows, ...rest }: RHFTextAreaProps<T>): JSX.Element;
+
+declare type RHFTextAreaProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Textarea>, 'label' | 'error' | 'required'> & {
+    control: Control<T>;
+    name: Path<T>;
+    register: UseFormRegister<T>;
+    label?: string;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    required?: boolean;
+    showMaxLength?: boolean;
+};
 
 export declare function ScrollArea({ className, children, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.Root>): JSX.Element;
 

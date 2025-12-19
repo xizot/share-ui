@@ -27,6 +27,25 @@ yarn add git+https://github.com/xizot/share-ui.git
 pnpm add git+https://github.com/xizot/share-ui.git
 ```
 
+### Peer Dependencies
+
+This library requires the following peer dependencies. You need to install them separately:
+
+```bash
+# Required peer dependencies
+npm install react react-dom
+
+# Optional peer dependencies (only if you use RHF components or date pickers)
+npm install react-hook-form date-fns react-day-picker
+```
+
+**Peer Dependencies:**
+- `react` ^18.0.0 || ^19.0.0 (required)
+- `react-dom` ^18.0.0 || ^19.0.0 (required)
+- `react-hook-form` ^7.0.0 (optional - only for RHF components)
+- `date-fns` ^2.0.0 || ^3.0.0 (optional - only for date pickers)
+- `react-day-picker` ^9.0.0 (optional - only for date pickers)
+
 ### Setup in Your Project
 
 This library uses **Tailwind CSS v4**. The CSS is already bundled, but you need to ensure your project is compatible:
@@ -89,6 +108,74 @@ import { cn } from 'shared-ui'
 const className = cn("base-class", condition && "conditional-class")
 ```
 
+### Using RHF Components
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { RHFInput, RHFTextarea, RHFCombobox } from 'shared-ui'
+
+function MyForm() {
+  const { control, register } = useForm({
+    defaultValues: {
+      email: '',
+      message: '',
+      country: ''
+    }
+  })
+
+  const options = [
+    { id: 1, name: 'Vietnam' },
+    { id: 2, name: 'USA' }
+  ]
+
+  return (
+    <form>
+      <RHFInput
+        control={control}
+        register={register}
+        name="email"
+        label="Email"
+        type="email"
+        required
+      />
+      
+      <RHFTextarea
+        control={control}
+        register={register}
+        name="message"
+        label="Message"
+        required
+      />
+      
+      <RHFCombobox
+        control={control}
+        name="country"
+        options={options}
+        label="Country"
+        required
+      />
+    </form>
+  )
+}
+```
+
+### Using Toast Notifications
+
+```tsx
+import { Toaster, toast } from 'shared-ui'
+
+function App() {
+  return (
+    <>
+      <Toaster />
+      <button onClick={() => toast.success('Success!')}>
+        Show Toast
+      </button>
+    </>
+  )
+}
+```
+
 ## Available Components
 
 ### Layout & Structure
@@ -111,17 +198,28 @@ const className = cn("base-class", condition && "conditional-class")
 - **button** - Button component with variants
 - **button-group** - Group of buttons
 - **checkbox** - Checkbox input
-- **input** - Text input field
+- **combobox** - Searchable select dropdown
+- **input** - Text input field with label/error support
 - **input-group** - Input with addons
 - **input-otp** - OTP input field
 - **label** - Form label
 - **radio-group** - Radio button group
-- **select** - Select dropdown
+- **select** - Select dropdown with label/error support
 - **slider** - Range slider
 - **switch** - Toggle switch
-- **textarea** - Multi-line text input
+- **textarea** - Multi-line text input with label/error support
 - **form** - Form wrapper with validation
 - **field** - Form field wrapper
+
+### React Hook Form Components (RHF)
+- **RHFInput** - Input with react-hook-form integration
+- **RHFTextarea** - Textarea with react-hook-form integration
+- **RHFCombobox** - Combobox with react-hook-form integration
+- **RHFSwitch** - Switch with react-hook-form integration
+- **RHFRadioGroup** - RadioGroup with react-hook-form integration
+- **RHFDatePicker** - Date picker with react-hook-form integration
+- **RHFDateRangePicker** - Date range picker with react-hook-form integration
+- **RHFFormattedInput** - Formatted input (integer, decimal, currency) with react-hook-form integration
 
 ### Feedback
 - **alert** - Alert messages
@@ -215,11 +313,89 @@ shared-ui/
 └── package.json
 ```
 
+## Guidelines
+
+### When to Install Peer Dependencies
+
+**Always Required:**
+- `react` and `react-dom` - Core React dependencies
+
+**Only if using RHF Components:**
+- `react-hook-form` - Required for all `RHF*` components (RHFInput, RHFTextarea, RHFCombobox, etc.)
+
+**Only if using Date Pickers:**
+- `date-fns` - Required for date formatting in RHFDatePicker and RHFDateRangePicker
+- `react-day-picker` - Required for Calendar component and date pickers
+
+### Best Practices
+
+1. **Import Styles First**
+   ```tsx
+   import 'shared-ui/styles.css' // Import at the top of your entry file
+   import { Button } from 'shared-ui'
+   ```
+
+2. **Tree-shaking**
+   - Import only what you need to keep bundle size small
+   ```tsx
+   // ✅ Good - Tree-shakeable
+   import { Button, Input } from 'shared-ui'
+   
+   // ❌ Avoid - Imports everything
+   import * as SharedUI from 'shared-ui'
+   ```
+
+3. **Using RHF Components**
+   ```tsx
+   import { useForm } from 'react-hook-form'
+   import { RHFInput, RHFTextarea } from 'shared-ui'
+   
+   function MyForm() {
+     const { control, register } = useForm()
+     
+     return (
+       <form>
+         <RHFInput
+           control={control}
+           register={register}
+           name="email"
+           label="Email"
+           required
+         />
+       </form>
+     )
+   }
+   ```
+
+4. **Using Date Pickers**
+   ```tsx
+   import { RHFDatePicker } from 'shared-ui'
+   import { format } from 'date-fns' // date-fns is peer dependency
+   
+   // Make sure react-day-picker is installed
+   ```
+
+5. **Component Props**
+   - All `className` props use `ComponentProps['className']` for type safety
+   - Always pass `id` prop when using `label` to ensure proper accessibility
+
+6. **Error Handling**
+   - RHF components automatically display errors from react-hook-form
+   - Base components (Input, Textarea, etc.) accept `error` prop directly
+
+7. **Accessibility**
+   - All components follow ARIA guidelines
+   - Labels are properly linked to inputs via `htmlFor` and `id`
+   - Error messages are announced to screen readers
+
 ## Dependencies
 
 ### Peer Dependencies
-- `react` ^18.0.0 || ^19.0.0
-- `react-dom` ^18.0.0 || ^19.0.0
+- `react` ^18.0.0 || ^19.0.0 (required)
+- `react-dom` ^18.0.0 || ^19.0.0 (required)
+- `react-hook-form` ^7.0.0 (optional - for RHF components)
+- `date-fns` ^2.0.0 || ^3.0.0 (optional - for date pickers)
+- `react-day-picker` ^9.0.0 (optional - for date pickers)
 
 ### Included Dependencies
 - All Radix UI primitives
@@ -227,6 +403,7 @@ shared-ui/
 - `clsx`
 - `tailwind-merge`
 - `lucide-react` (icons)
+- `sonner` (toast notifications)
 - And more (see package.json)
 
 ## License

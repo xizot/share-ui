@@ -19,13 +19,12 @@ function Input({
   id,
   ...props 
 }: InputProps) {
-  const inputId = id || React.useId()
   const hasLabelOrError = label || error
 
   const inputElement = (
     <input
       type={type}
-      id={inputId}
+      id={id}
       data-slot="input"
       aria-invalid={!!error}
       className={cn(
@@ -47,7 +46,7 @@ function Input({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <Label htmlFor={inputId}>
+        <Label htmlFor={id}>
           {label}
           {required && <span className="text-destructive">*</span>}
         </Label>

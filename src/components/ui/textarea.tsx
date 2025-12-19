@@ -17,12 +17,11 @@ function Textarea({
   id,
   ...props 
 }: TextareaProps) {
-  const textareaId = id || React.useId()
   const hasLabelOrError = label || error
 
   const textareaElement = (
     <textarea
-      id={textareaId}
+      id={id}
       data-slot="textarea"
       aria-invalid={!!error}
       className={cn(
@@ -44,7 +43,7 @@ function Textarea({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <Label htmlFor={textareaId}>
+        <Label htmlFor={id}>
           {label}
           {required && <span className="text-destructive">*</span>}
         </Label>

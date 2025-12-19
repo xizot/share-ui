@@ -75,6 +75,7 @@ export default defineConfig(({ command, mode }) => {
             'next-themes',
             'react-day-picker',
             'react-hook-form',
+            'date-fns',
             'react-resizable-panels',
             'recharts',
             'sonner',
