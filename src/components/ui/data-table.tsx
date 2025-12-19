@@ -1,83 +1,63 @@
+import { DEFAULT_PAGE_SIZE_OPTIONS } from '@/constants/common';
 import { cn } from '@/lib/utils';
+import { SelectGroup } from '@radix-ui/react-select';
 import {
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
   type Cell,
   type ColumnDef,
-  type ColumnFiltersState,
   type FilterFn,
   type HeaderGroup,
+  type PaginationOptions,
+  type PaginationState,
   type Row,
   type SortingState,
-  type VisibilityState,
 } from '@tanstack/react-table';
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import * as React from 'react';
 import { Button } from './button';
 import { Input } from './input';
+import { Pagination, PaginationContent, PaginationItem, PaginationRange } from './pagination';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './table';
 
 interface DataTableProps<T extends Record<string, unknown>> {
   data: T[];
   columns: ColumnDef<T, unknown>[];
+  pagination: PaginationState;
+  paginationOptions: Pick<PaginationOptions, 'onPaginationChange' | 'rowCount'>;
+  totalPages?: number;
   searchable?: boolean;
   searchPlaceholder?: string;
   searchKey?: keyof T | string;
-  pagination?: {
-    pageSize?: number;
-    showPagination?: boolean;
-  };
   emptyMessage?: string;
   className?: string;
   enableGlobalFilter?: boolean;
   globalFilterFn?: FilterFn<T>;
   onRowClick?: (row: T) => void;
   rowClassName?: (row: T) => string;
-  labels?: {
-    previous?: string;
-    next?: string;
-    showing?: string;
-    to?: string;
-    of?: string;
-    results?: string;
-    page?: string;
-  };
 }
 
 function DataTable<T extends Record<string, unknown>>({
   data,
+  paginationOptions,
   columns,
+  totalPages = 0,
   searchable = false,
   searchPlaceholder,
   searchKey,
-  pagination = { pageSize: 10, showPagination: true },
   emptyMessage,
   className,
   enableGlobalFilter = true,
   globalFilterFn,
+  pagination,
   onRowClick,
   rowClassName,
-  labels,
 }: DataTableProps<T>) {
-  const {
-    previous = 'Previous',
-    next = 'Next',
-    showing = 'Showing',
-    to = 'to',
-    of = 'of',
-    results = 'results',
-    page = 'Page',
-  } = labels || {};
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [globalFilter, setGlobalFilter] = React.useState('');
 
-  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
@@ -90,13 +70,10 @@ function DataTable<T extends Record<string, unknown>>({
       return String(index);
     },
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onColumnVisibilityChange: setColumnVisibility,
-    onGlobalFilterChange: setGlobalFilter,
+    manualFiltering: true,
+    manualSorting: true,
+    manualPagination: true,
     globalFilterFn:
       globalFilterFn ||
       ((row, _columnId, filterValue) => {
@@ -113,15 +90,12 @@ function DataTable<T extends Record<string, unknown>>({
     enableGlobalFilter: searchable && enableGlobalFilter,
     state: {
       sorting,
-      columnFilters,
-      columnVisibility,
-      globalFilter: searchable ? globalFilter : undefined,
-    },
-    initialState: {
-      pagination: {
-        pageSize: pagination.pageSize || 10,
+      pagination,
+      columnPinning: {
+        right: ['actions'],
       },
     },
+    ...paginationOptions,
   });
 
   return (
@@ -147,7 +121,7 @@ function DataTable<T extends Record<string, unknown>>({
                   return (
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : (
-                        <div className="flex items-center gap-2">
+                        <div className="flex gap-2 items-center">
                           <div
                             className={cn(
                               canSort && 'cursor-pointer select-none hover:text-foreground',
@@ -160,7 +134,7 @@ function DataTable<T extends Record<string, unknown>>({
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-4 w-4"
+                              className="w-4 h-4"
                               onClick={header.column.getToggleSortingHandler()}
                             >
                               {isSorted === 'asc' ? (
@@ -201,7 +175,7 @@ function DataTable<T extends Record<string, unknown>>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={table.getAllColumns().length} className="text-center py-8">
+                <TableCell colSpan={table.getAllColumns().length} className="py-8 text-center">
                   {emptyMessage || 'No data available'}
                 </TableCell>
               </TableRow>
@@ -210,43 +184,56 @@ function DataTable<T extends Record<string, unknown>>({
         </Table>
       </div>
 
-      {pagination.showPagination && table.getPageCount() > 1 && (
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {showing}{' '}
-            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} {to}{' '}
-            {Math.min(
-              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
-              table.getFilteredRowModel().rows.length,
-            )}{' '}
-            {of} {table.getFilteredRowModel().rows.length} {results}
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <ChevronLeft className="h-4 w-4" />
-              {previous}
-            </Button>
-            <div className="text-sm">
-              {page} {table.getState().pagination.pageIndex + 1} {of} {table.getPageCount()}
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              {next}
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+      {typeof totalPages === 'number' && totalPages > 1 && (
+        <DataTablePagination table={table} totalPages={totalPages} />
       )}
     </div>
+  );
+}
+
+interface DataTablePaginationProps<TData> {
+  table: ReturnType<typeof useReactTable<TData>>;
+  totalPages: number;
+}
+
+function DataTablePagination<TData>({ table, totalPages }: DataTablePaginationProps<TData>) {
+  return (
+    <Pagination>
+      <PaginationContent className="flex-1 gap-4 justify-end">
+        <PaginationItem>
+          <PaginationRange
+            currentPage={table.getState().pagination.pageIndex + 1}
+            pageSize={table.getState().pagination.pageSize}
+            totalPages={totalPages}
+            isGroupButton
+            onPageChange={(page) => {
+              table.setPageIndex(page - 1);
+            }}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <Select
+            onValueChange={(value) => {
+              table.setPageSize(Number(value));
+            }}
+            value={table.getState().pagination.pageSize.toString()}
+          >
+            <SelectTrigger className="w-[130px]" size={'sm'}>
+              <SelectValue placeholder="Chọn" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {DEFAULT_PAGE_SIZE_OPTIONS.map((option) => (
+                  <SelectItem key={option.id} value={option.id.toString()}>
+                    {option.name}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }
 

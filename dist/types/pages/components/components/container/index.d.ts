@@ -1,2 +1,0 @@
-export default function ContainerOverview(): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=index.d.ts.map

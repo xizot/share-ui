@@ -62,7 +62,7 @@ export default function DataTableOverview() {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">When to Use</h3>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+        <ul className="space-y-2 list-disc list-inside text-muted-foreground">
           <li>Displaying large datasets</li>
           <li>Tables that require sorting and filtering</li>
           <li>Data grids with pagination</li>
@@ -73,8 +73,8 @@ export default function DataTableOverview() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Code className="h-5 w-5" />
+          <CardTitle className="flex gap-2 items-center">
+            <Code className="w-5 h-5" />
             Basic Usage
           </CardTitle>
           <CardDescription>Simple data table example</CardDescription>
@@ -86,17 +86,29 @@ export default function DataTableOverview() {
             searchable
             searchPlaceholder="Search users..."
             searchKey="name"
-            pagination={{ pageSize: 5 }}
+            paginationOptions={{
+              onPaginationChange: (pagination) => {
+                console.log(pagination);
+              },
+            }}
+            pagination={{
+              pageIndex: 0,
+              pageSize: 10,
+            }}
           />
-          <div className="bg-muted p-4 rounded-md font-mono text-sm">
+          <div className="p-4 font-mono text-sm rounded-md bg-muted">
             <div className="text-muted-foreground">
               import {'{'} DataTable, type ColumnDef {'}'} from 'shared-ui'
             </div>
             <div className="mt-2">
               <div className="text-muted-foreground">{'<'}</div>
               <div className="ml-4">{'<'}DataTable</div>
-              <div className="ml-8">data={'{'}data{'}'}</div>
-              <div className="ml-8">columns={'{'}columns{'}'}</div>
+              <div className="ml-8">
+                data={'{'}data{'}'}
+              </div>
+              <div className="ml-8">
+                columns={'{'}columns{'}'}
+              </div>
               <div className="ml-8">searchable</div>
               <div className="ml-4">{'/>'}</div>
               <div className="text-muted-foreground">{'</'}</div>
@@ -107,7 +119,7 @@ export default function DataTableOverview() {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">Key Features</h3>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+        <ul className="space-y-2 list-disc list-inside text-muted-foreground">
           <li>Built on TanStack Table (formerly React Table)</li>
           <li>Column sorting (ascending/descending)</li>
           <li>Global search/filtering</li>
@@ -121,4 +133,3 @@ export default function DataTableOverview() {
     </div>
   );
 }
-

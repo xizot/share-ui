@@ -3,7 +3,7 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import * as React from 'react';
 
 import { Label } from '@/components/ui/label';
-import { FORM_SIZES, formSizeVariants, type FormSize } from '@/constants/form-sizes';
+import { FORM_SIZES, type FormSize } from '@/constants/form-sizes';
 import { cn } from '@/lib/utils';
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
@@ -43,8 +43,9 @@ function SelectTrigger({
       data-size={size}
       aria-invalid={!!error}
       className={cn(
-        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        formSizeVariants({ size }),
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        sizeConfig.height,
+        sizeConfig.text,
         sizeConfig.padding,
         {
           "[&_svg:not([class*='size-'])]:size-3": size === 'xxs',
@@ -82,7 +83,7 @@ function SelectTrigger({
       )}
       {triggerElement}
       {error && (
-        <div className={`text-destructive text-sm`} role="alert">
+        <div className={`text-sm text-destructive`} role="alert">
           {error}
         </div>
       )}
@@ -171,7 +172,7 @@ function SelectSeparator({
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
-      className={cn('bg-border pointer-events-none -mx-1 my-1 h-px', className)}
+      className={cn('-mx-1 my-1 h-px pointer-events-none bg-border', className)}
       {...props}
     />
   );
@@ -184,7 +185,7 @@ function SelectScrollUpButton({
   return (
     <SelectPrimitive.ScrollUpButton
       data-slot="select-scroll-up-button"
-      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      className={cn('flex justify-center items-center py-1 cursor-default', className)}
       {...props}
     >
       <ChevronUpIcon className="size-4" />
@@ -199,7 +200,7 @@ function SelectScrollDownButton({
   return (
     <SelectPrimitive.ScrollDownButton
       data-slot="select-scroll-down-button"
-      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      className={cn('flex justify-center items-center py-1 cursor-default', className)}
       {...props}
     >
       <ChevronDownIcon className="size-4" />
@@ -217,6 +218,5 @@ export {
   SelectScrollUpButton,
   SelectSeparator,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 };
-

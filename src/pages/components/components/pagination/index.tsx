@@ -1,13 +1,11 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
-  PaginationPrevious,
+  PaginationPrevious
 } from '@/components/ui/pagination';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Code } from 'lucide-react';
 
 export default function PaginationOverview() {
@@ -25,7 +23,7 @@ export default function PaginationOverview() {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">When to Use</h3>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+        <ul className="space-y-2 list-disc list-inside text-muted-foreground">
           <li>Navigating through paginated data tables or lists</li>
           <li>Browsing search results or filtered content</li>
           <li>Displaying large datasets in manageable chunks</li>
@@ -35,8 +33,8 @@ export default function PaginationOverview() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Code className="h-5 w-5" />
+          <CardTitle className="flex gap-2 items-center">
+            <Code className="w-5 h-5" />
             Basic Usage
           </CardTitle>
           <CardDescription>Simple pagination with previous/next buttons</CardDescription>
@@ -52,7 +50,7 @@ export default function PaginationOverview() {
               </PaginationItem>
             </PaginationContent>
           </Pagination>
-          <div className="bg-muted p-4 rounded-md font-mono text-sm">
+          <div className="p-4 font-mono text-sm rounded-md bg-muted">
             <div className="text-muted-foreground">
               import {'{'} Pagination, PaginationContent, PaginationItem, PaginationPrevious,
               PaginationNext {'}'} from 'shared-ui'
@@ -77,7 +75,7 @@ export default function PaginationOverview() {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">Key Features</h3>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+        <ul className="space-y-2 list-disc list-inside text-muted-foreground">
           <li>Composable sub-components for flexible pagination patterns</li>
           <li>Accessible navigation with proper ARIA labels</li>
           <li>Responsive design with mobile-friendly controls</li>
@@ -89,7 +87,7 @@ export default function PaginationOverview() {
 
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">Component Structure</h3>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+        <ul className="space-y-2 list-disc list-inside text-muted-foreground">
           <li>
             <code className="rounded bg-muted px-1 py-0.5 text-sm">Pagination</code> - Root
             container with navigation role

@@ -11,7 +11,7 @@ export type RHFErrorMessageProps<T extends FieldValues> = {
 export function RHFErrorMessage<T extends FieldValues = FieldValues>({
   name,
   control,
-}: RHFErrorMessageProps<T>) => {
+}: RHFErrorMessageProps<T>) {
   const formState = useFormState({
     control,
     name,
