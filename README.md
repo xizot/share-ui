@@ -102,10 +102,30 @@ import { Input, Label } from 'shared-ui'
 ### Using Utilities
 
 ```tsx
-import { cn } from 'shared-ui'
+import { cn, get, hasValue } from 'shared-ui'
 
 // Merge Tailwind classes
 const className = cn("base-class", condition && "conditional-class")
+
+// Get nested object property
+const userName = get(user, 'profile.name') // Safe property access
+
+// Check if value exists
+if (hasValue(data)) {
+  // Handle non-empty value
+}
+```
+
+### Using Hooks
+
+```tsx
+import { useIsMobile } from 'shared-ui'
+
+function MyComponent() {
+  const isMobile = useIsMobile()
+  
+  return <div>{isMobile ? 'Mobile' : 'Desktop'}</div>
+}
 ```
 
 ### Using RHF Components
@@ -387,6 +407,41 @@ shared-ui/
    - All components follow ARIA guidelines
    - Labels are properly linked to inputs via `htmlFor` and `id`
    - Error messages are announced to screen readers
+
+8. **Available Utilities**
+   - **Core**: `cn()`, `get()`, `hasValue()`, `toast`
+   - **Formatting**: `formatCurrency()`, `formatDate()`, `formatPhoneNumber()`, `formatFileSize()`, `truncate()`
+   - **Validation**: `validateEmail()`, `validatePhone()`, `validateURL()`, `validateVietnamesePhone()`
+   - **Data**: `deepMerge()`, `pick()`, `omit()`, `groupBy()`, `sortBy()`
+   - **String**: `slugify()`, `camelCase()`, `kebabCase()`, `capitalize()`
+   - **Performance**: `lazyLoad()`, `calculateVirtualScroll()`
+
+9. **Available Hooks**
+   - **Media**: `useIsMobile()`, `useIsTablet()`, `useMediaQuery()`, `useBreakpoint()`, `useWindowSize()`
+   - **Form**: `useDebounce()`, `useDebouncedCallback()`, `useThrottle()`
+   - **Storage**: `useLocalStorage()`, `useSessionStorage()`
+   - **UI**: `useClickOutside()`, `useCopyToClipboard()`, `useToggle()`, `usePrevious()`
+   - **Performance**: `useMemoizedCallback()`
+   - **Accessibility**: `useFocusTrap()`, `useKeyboardNavigation()`, `useAriaLabel()`
+   - **Theme**: `useTheme()` (requires ThemeProvider)
+   - **i18n**: `useTranslation()` (requires I18nProvider)
+
+10. **Available Components**
+    - **Layout**: `Container`, `Stack`, `Grid`, `Divider`
+    - **Feedback**: `LoadingButton`, `ConfirmDialog`, `DeleteConfirmDialog`
+    - **Data Display**: `DataTable`, `EmptyState`, `LoadingState`, `ErrorBoundary`, `StatusBadge`
+    - **RHF Components**: `RHFInput`, `RHFTextarea`, `RHFNumberInput`, `RHFCheckboxGroup`, `RHFMultiSelect`, `RHFUpload`, `RHFTimePicker`, `RHFDatePicker`, `RHFDateRangePicker`, `RHFCombobox`, `RHFSwitch`, `RHFRadioGroup`, `RHFFormattedInput`
+
+11. **Available Constants**
+    - `BREAKPOINTS` - Responsive breakpoints (sm, md, lg, xl, 2xl)
+    - `REGEX` - Common regex patterns (email, phone, URL, etc.)
+    - `DATE_FORMATS` - Predefined date format strings
+
+12. **Available Types**
+    - `ComboboxOption`, `ComboboxBaseOption`
+    - `ChartConfig`
+    - `DeepPartial`, `RequiredFields`, `OptionalFields`, `Prettify`
+    - `StatusType`, `Breakpoint`, `DateFormat`
 
 ## Dependencies
 

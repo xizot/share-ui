@@ -1,20 +1,23 @@
-import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { cn } from "@/lib/utils"
-import type { ComponentProps } from "react"
-import { useController, useFormState } from "react-hook-form"
-import type { Control, FieldValues, Path, UseFormRegister } from "react-hook-form"
-import { get } from "@/lib/utils"
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import type { ComponentProps } from 'react';
+import { useController, useFormState } from 'react-hook-form';
+import type { Control, FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { get } from '@/lib/utils';
 
-type RHFTextAreaProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Textarea>, 'label' | 'error' | 'required'> & {
-  control: Control<T>
-  name: Path<T>
-  register: UseFormRegister<T>
-  label?: string
-  wrapperClassName?: ComponentProps<'div'>['className']
-  required?: boolean
-  showMaxLength?: boolean
-}
+type RHFTextAreaProps<T extends FieldValues = FieldValues> = Omit<
+  ComponentProps<typeof Textarea>,
+  'label' | 'error' | 'required'
+> & {
+  control: Control<T>;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  label?: string;
+  wrapperClassName?: ComponentProps<'div'>['className'];
+  required?: boolean;
+  showMaxLength?: boolean;
+};
 
 export default function RHFTextArea<T extends FieldValues = FieldValues>({
   control,
@@ -30,8 +33,8 @@ export default function RHFTextArea<T extends FieldValues = FieldValues>({
   rows = 5,
   ...rest
 }: RHFTextAreaProps<T>) {
-  const formState = useFormState({ control, name })
-  const error = get<string>(formState.errors, `${name}.message`)
+  const formState = useFormState({ control, name });
+  const error = get<string>(formState.errors, `${name}.message`);
 
   return (
     <div className={cn('relative w-full', wrapperClassName)}>
@@ -48,24 +51,23 @@ export default function RHFTextArea<T extends FieldValues = FieldValues>({
       />
       {showMaxLength && <TextAreaBadge control={control} name={name} maxLength={maxLength} />}
     </div>
-  )
+  );
 }
 
-const TextAreaBadge = <T extends FieldValues = FieldValues>({ 
-  control, 
-  name, 
-  maxLength 
-}: { 
-  control: Control<T>
-  name: Path<T>
-  maxLength: number 
+const TextAreaBadge = <T extends FieldValues = FieldValues>({
+  control,
+  name,
+  maxLength,
+}: {
+  control: Control<T>;
+  name: Path<T>;
+  maxLength: number;
 }) => {
-  const { field } = useController({ control, name })
+  const { field } = useController({ control, name });
 
   return (
     <Badge variant="secondary" className="absolute rounded-sm right-3 bottom-2 text-[8px]">
       {field.value?.length || 0}/{maxLength}
     </Badge>
-  )
-}
-
+  );
+};

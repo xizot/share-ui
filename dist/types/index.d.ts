@@ -6,6 +6,7 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { ClassProp } from 'class-variance-authority/types';
 import { ClassValue } from 'clsx';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import { ColumnDef } from '@tanstack/react-table';
 import { Command as Command_2 } from 'cmdk';
 import { ComponentProps } from 'react';
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
@@ -15,6 +16,7 @@ import { DateRange } from 'react-day-picker';
 import { DayButton } from 'react-day-picker';
 import { DayPicker } from 'react-day-picker';
 import { default as default_2 } from 'embla-carousel-react';
+import { DependencyList } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Drawer as Drawer_2 } from 'vaul';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
@@ -22,6 +24,7 @@ import { FieldError as FieldError_2 } from 'react-hook-form';
 import { FieldPath } from 'react-hook-form';
 import { FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form';
+import { FilterFn } from '@tanstack/react-table';
 import { FormProviderProps } from 'react-hook-form';
 import { Group } from 'react-resizable-panels';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
@@ -37,6 +40,7 @@ import * as ProgressPrimitive from '@radix-ui/react-progress';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import * as React_2 from 'react';
 import * as RechartsPrimitive from 'recharts';
+import { RefObject } from 'react';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Separator as Separator_2 } from 'react-resizable-panels';
@@ -77,9 +81,9 @@ export declare function AlertDialogContent({ className, ...props }: React_2.Comp
 
 export declare function AlertDialogDescription({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Description>): JSX.Element;
 
-export declare function AlertDialogFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function AlertDialogFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function AlertDialogHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function AlertDialogHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function AlertDialogOverlay({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Overlay>): JSX.Element;
 
@@ -99,7 +103,7 @@ export declare function AvatarFallback({ className, ...props }: React_2.Componen
 
 export declare function AvatarImage({ className, ...props }: React_2.ComponentProps<typeof AvatarPrimitive.Image>): JSX.Element;
 
-export declare function Badge({ className, variant, asChild, ...props }: React_2.ComponentProps<"span"> & VariantProps<typeof badgeVariants> & {
+export declare function Badge({ className, variant, asChild, ...props }: React_2.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & {
     asChild?: boolean;
 }): JSX.Element;
 
@@ -107,31 +111,41 @@ export declare const badgeVariants: (props?: ({
     variant?: "default" | "destructive" | "outline" | "secondary" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function Breadcrumb({ ...props }: React_2.ComponentProps<"nav">): JSX.Element;
+export declare function Breadcrumb({ ...props }: React_2.ComponentProps<'nav'>): JSX.Element;
 
-export declare function BreadcrumbEllipsis({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function BreadcrumbEllipsis({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
-export declare function BreadcrumbItem({ className, ...props }: React_2.ComponentProps<"li">): JSX.Element;
+export declare function BreadcrumbItem({ className, ...props }: React_2.ComponentProps<'li'>): JSX.Element;
 
-export declare function BreadcrumbLink({ asChild, className, ...props }: React_2.ComponentProps<"a"> & {
+export declare function BreadcrumbLink({ asChild, className, ...props }: React_2.ComponentProps<'a'> & {
     asChild?: boolean;
 }): JSX.Element;
 
-export declare function BreadcrumbList({ className, ...props }: React_2.ComponentProps<"ol">): JSX.Element;
+export declare function BreadcrumbList({ className, ...props }: React_2.ComponentProps<'ol'>): JSX.Element;
 
-export declare function BreadcrumbPage({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function BreadcrumbPage({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
-export declare function BreadcrumbSeparator({ children, className, ...props }: React_2.ComponentProps<"li">): JSX.Element;
+export declare function BreadcrumbSeparator({ children, className, ...props }: React_2.ComponentProps<'li'>): JSX.Element;
 
-export declare function Button({ className, variant, size, asChild, ...props }: React_2.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
+export declare type Breakpoint = keyof typeof BREAKPOINTS;
+
+export declare const BREAKPOINTS: {
+    readonly sm: 640;
+    readonly md: 768;
+    readonly lg: 1024;
+    readonly xl: 1280;
+    readonly '2xl': 1536;
+};
+
+export declare function Button({ className, variant, size, asChild, ...props }: React_2.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
 }): JSX.Element;
 
-export declare function ButtonGroup({ className, orientation, ...props }: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>): JSX.Element;
+export declare function ButtonGroup({ className, orientation, ...props }: React.ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>): JSX.Element;
 
 export declare function ButtonGroupSeparator({ className, orientation, ...props }: React.ComponentProps<typeof Separator>): JSX.Element;
 
-export declare function ButtonGroupText({ className, asChild, ...props }: React.ComponentProps<"div"> & {
+export declare function ButtonGroupText({ className, asChild, ...props }: React.ComponentProps<'div'> & {
     asChild?: boolean;
 }): JSX.Element;
 
@@ -145,32 +159,32 @@ export declare const buttonVariants: (props?: ({
 } & ClassProp) | undefined) => string;
 
 export declare function Calendar({ className, classNames, showOutsideDays, captionLayout, buttonVariant, formatters, components, ...props }: React_2.ComponentProps<typeof DayPicker> & {
-    buttonVariant?: React_2.ComponentProps<typeof Button>["variant"];
+    buttonVariant?: React_2.ComponentProps<typeof Button>['variant'];
 }): JSX.Element;
 
 export declare function CalendarDayButton({ className, day, modifiers, ...props }: React_2.ComponentProps<typeof DayButton>): JSX.Element;
 
-export declare function Card({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function Card({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardAction({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardAction({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardContent({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardContent({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardDescription({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardDescription({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CardTitle({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CardTitle({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function Carousel({ orientation, opts, setApi, plugins, className, children, ...props }: React_2.ComponentProps<"div"> & CarouselProps): JSX.Element;
+export declare function Carousel({ orientation, opts, setApi, plugins, className, children, ...props }: React_2.ComponentProps<'div'> & CarouselProps): JSX.Element;
 
 export declare type CarouselApi = UseEmblaCarouselType[1];
 
-export declare function CarouselContent({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CarouselContent({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function CarouselItem({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function CarouselItem({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function CarouselNext({ className, variant, size, ...props }: React_2.ComponentProps<typeof Button>): JSX.Element;
 
@@ -183,7 +197,7 @@ export declare function CarouselPrevious({ className, variant, size, ...props }:
 declare type CarouselProps = {
     opts?: CarouselOptions;
     plugins?: CarouselPlugin;
-    orientation?: "horizontal" | "vertical";
+    orientation?: 'horizontal' | 'vertical';
     setApi?: (api: CarouselApi) => void;
 };
 
@@ -200,14 +214,14 @@ export declare type ChartConfig = {
     });
 };
 
-export declare function ChartContainer({ id, className, children, config, ...props }: React_2.ComponentProps<"div"> & {
+export declare function ChartContainer({ id, className, children, config, ...props }: React_2.ComponentProps<'div'> & {
     config: ChartConfig;
-    children: React_2.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
+    children: React_2.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>['children'];
 }): JSX.Element;
 
 export declare const ChartLegend: typeof RechartsPrimitive.Legend;
 
-export declare function ChartLegendContent({ className, hideIcon, payload, verticalAlign, nameKey, }: React_2.ComponentProps<"div"> & Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+export declare function ChartLegendContent({ className, hideIcon, payload, verticalAlign, nameKey, }: React_2.ComponentProps<'div'> & Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
     hideIcon?: boolean;
     nameKey?: string;
 }): JSX.Element | null;
@@ -219,10 +233,10 @@ export declare const ChartStyle: ({ id, config }: {
 
 export declare const ChartTooltip: typeof RechartsPrimitive.Tooltip;
 
-export declare function ChartTooltipContent({ active, payload, className, indicator, hideLabel, hideIndicator, label, labelFormatter, labelClassName, formatter, color, nameKey, labelKey, }: React_2.ComponentProps<typeof RechartsPrimitive.Tooltip> & React_2.ComponentProps<"div"> & {
+export declare function ChartTooltipContent({ active, payload, className, indicator, hideLabel, hideIndicator, label, labelFormatter, labelClassName, formatter, color, nameKey, labelKey, }: React_2.ComponentProps<typeof RechartsPrimitive.Tooltip> & React_2.ComponentProps<'div'> & {
     hideLabel?: boolean;
     hideIndicator?: boolean;
-    indicator?: "line" | "dot" | "dashed";
+    indicator?: 'line' | 'dot' | 'dashed';
     nameKey?: string;
     labelKey?: string;
 }): JSX.Element | null;
@@ -237,12 +251,14 @@ export declare function CollapsibleContent({ ...props }: React.ComponentProps<ty
 
 export declare function CollapsibleTrigger({ ...props }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>): JSX.Element;
 
+export { ColumnDef }
+
 export declare function Combobox({ options, value, onChange, label, error, required, placeholder, searchPlaceholder, emptyMessage, disabled, className, triggerClassName, popoverClassName, }: ComboboxProps): JSX.Element;
 
 export declare type ComboboxBaseOption = ComboboxOption;
 
 export declare type ComboboxOption = {
-    id: string | number;
+    id: string;
     code?: string;
     name: string;
     disabled?: boolean;
@@ -251,7 +267,7 @@ export declare type ComboboxOption = {
 declare type ComboboxProps = {
     options: ComboboxOption[];
     value?: string | number;
-    onChange?: (value: string | number, option: ComboboxOption | undefined) => void;
+    onChange?: (value: string, option: ComboboxOption | undefined) => void;
     label?: string | React_2.ReactNode;
     error?: string;
     required?: boolean;
@@ -289,7 +305,27 @@ export declare function CommandList({ className, ...props }: React_2.ComponentPr
 
 export declare function CommandSeparator({ className, ...props }: React_2.ComponentProps<typeof Command_2.Separator>): JSX.Element;
 
-export declare function CommandShortcut({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function CommandShortcut({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
+
+export declare function ConfirmDialog({ open, onOpenChange, title, description, confirmText, cancelText, onConfirm, variant, loading, }: ConfirmDialogProps): JSX.Element;
+
+declare interface ConfirmDialogProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    title: string;
+    description?: string;
+    confirmText?: string;
+    cancelText?: string;
+    onConfirm: () => void | Promise<void>;
+    variant?: 'default' | 'destructive';
+    loading?: boolean;
+}
+
+export declare function Container({ className, maxWidth, ...props }: ContainerProps): JSX.Element;
+
+declare interface ContainerProps extends React_2.ComponentProps<'div'> {
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+}
 
 export declare function ContextMenu({ ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Root>): JSX.Element;
 
@@ -301,7 +337,7 @@ export declare function ContextMenuGroup({ ...props }: React_2.ComponentProps<ty
 
 export declare function ContextMenuItem({ className, inset, variant, ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Item> & {
     inset?: boolean;
-    variant?: "default" | "destructive";
+    variant?: 'default' | 'destructive';
 }): JSX.Element;
 
 export declare function ContextMenuLabel({ className, inset, ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Label> & {
@@ -316,7 +352,7 @@ export declare function ContextMenuRadioItem({ className, children, ...props }: 
 
 export declare function ContextMenuSeparator({ className, ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Separator>): JSX.Element;
 
-export declare function ContextMenuShortcut({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function ContextMenuShortcut({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
 export declare function ContextMenuSub({ ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Sub>): JSX.Element;
 
@@ -328,6 +364,59 @@ export declare function ContextMenuSubTrigger({ className, inset, children, ...p
 
 export declare function ContextMenuTrigger({ ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Trigger>): JSX.Element;
 
+export declare function DataTable<T extends Record<string, unknown>>({ data, columns, searchable, searchPlaceholder, searchKey, pagination, emptyMessage, className, enableGlobalFilter, globalFilterFn, onRowClick, rowClassName, labels, }: DataTableProps<T>): JSX.Element;
+
+declare interface DataTableProps<T extends Record<string, unknown>> {
+    data: T[];
+    columns: ColumnDef<T, unknown>[];
+    searchable?: boolean;
+    searchPlaceholder?: string;
+    searchKey?: keyof T | string;
+    pagination?: {
+        pageSize?: number;
+        showPagination?: boolean;
+    };
+    emptyMessage?: string;
+    className?: string;
+    enableGlobalFilter?: boolean;
+    globalFilterFn?: FilterFn<T>;
+    onRowClick?: (row: T) => void;
+    rowClassName?: (row: T) => string;
+    labels?: {
+        previous?: string;
+        next?: string;
+        showing?: string;
+        to?: string;
+        of?: string;
+        results?: string;
+        page?: string;
+    };
+}
+
+export declare const DATE_FORMATS: {
+    readonly short: "dd/MM/yyyy";
+    readonly long: "dd MMMM yyyy";
+    readonly datetime: "dd/MM/yyyy HH:mm";
+    readonly datetimeLong: "dd MMMM yyyy HH:mm";
+    readonly time: "HH:mm";
+    readonly iso: "yyyy-MM-dd";
+    readonly isoDateTime: "yyyy-MM-dd'T'HH:mm:ss";
+};
+
+export declare type DateFormat = keyof typeof DATE_FORMATS;
+
+export declare function DeleteConfirmDialog({ open, onOpenChange, title, description, itemName, onConfirm, loading, }: DeleteConfirmDialogProps): JSX.Element;
+
+declare interface DeleteConfirmDialogProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    title?: string;
+    description?: string;
+    itemName?: string;
+    onConfirm: () => void | Promise<void>;
+    loading?: boolean;
+}
+
 export declare function Dialog({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Root>): JSX.Element;
 
 export declare function DialogClose({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Close>): JSX.Element;
@@ -338,9 +427,9 @@ export declare function DialogContent({ className, children, showCloseButton, ..
 
 export declare function DialogDescription({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Description>): JSX.Element;
 
-export declare function DialogFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function DialogFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function DialogHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function DialogHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function DialogOverlay({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Overlay>): JSX.Element;
 
@@ -350,6 +439,13 @@ export declare function DialogTitle({ className, ...props }: React_2.ComponentPr
 
 export declare function DialogTrigger({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Trigger>): JSX.Element;
 
+export declare function Divider({ className, label, labelPosition, orientation, ...props }: DividerProps): JSX.Element;
+
+declare interface DividerProps extends React_2.ComponentProps<typeof Separator> {
+    label?: React_2.ReactNode;
+    labelPosition?: 'left' | 'center' | 'right';
+}
+
 export declare function Drawer({ ...props }: React_2.ComponentProps<typeof Drawer_2.Root>): JSX.Element;
 
 export declare function DrawerClose({ ...props }: React_2.ComponentProps<typeof Drawer_2.Close>): JSX.Element;
@@ -358,9 +454,9 @@ export declare function DrawerContent({ className, children, ...props }: React_2
 
 export declare function DrawerDescription({ className, ...props }: React_2.ComponentProps<typeof Drawer_2.Description>): JSX.Element;
 
-export declare function DrawerFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function DrawerFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function DrawerHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function DrawerHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function DrawerOverlay({ className, ...props }: React_2.ComponentProps<typeof Drawer_2.Overlay>): JSX.Element;
 
@@ -380,7 +476,7 @@ export declare function DropdownMenuGroup({ ...props }: React_2.ComponentProps<t
 
 export declare function DropdownMenuItem({ className, inset, variant, ...props }: React_2.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
-    variant?: "default" | "destructive";
+    variant?: 'default' | 'destructive';
 }): JSX.Element;
 
 export declare function DropdownMenuLabel({ className, inset, ...props }: React_2.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
@@ -395,7 +491,7 @@ export declare function DropdownMenuRadioItem({ className, children, ...props }:
 
 export declare function DropdownMenuSeparator({ className, ...props }: React_2.ComponentProps<typeof DropdownMenuPrimitive.Separator>): JSX.Element;
 
-export declare function DropdownMenuShortcut({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function DropdownMenuShortcut({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
 export declare function DropdownMenuSub({ ...props }: React_2.ComponentProps<typeof DropdownMenuPrimitive.Sub>): JSX.Element;
 
@@ -407,49 +503,79 @@ export declare function DropdownMenuSubTrigger({ className, inset, children, ...
 
 export declare function DropdownMenuTrigger({ ...props }: React_2.ComponentProps<typeof DropdownMenuPrimitive.Trigger>): JSX.Element;
 
-export declare function Empty({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function Empty({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
-export declare function EmptyContent({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function EmptyContent({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
-export declare function EmptyDescription({ className, ...props }: React.ComponentProps<"p">): JSX.Element;
+export declare function EmptyDescription({ className, ...props }: React.ComponentProps<'p'>): JSX.Element;
 
-export declare function EmptyHeader({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function EmptyHeader({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
-export declare function EmptyMedia({ className, variant, ...props }: React.ComponentProps<"div"> & VariantProps<typeof emptyMediaVariants>): JSX.Element;
+export declare function EmptyMedia({ className, variant, ...props }: React.ComponentProps<'div'> & VariantProps<typeof emptyMediaVariants>): JSX.Element;
 
 declare const emptyMediaVariants: (props?: ({
     variant?: "default" | "icon" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function EmptyTitle({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function EmptyState({ className, icon, title, description, action, children, ...props }: EmptyStateProps): JSX.Element;
 
-export declare function Field({ className, orientation, ...props }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>): JSX.Element;
+declare interface EmptyStateProps extends React_2.ComponentProps<typeof Empty> {
+    icon?: React_2.ReactNode;
+    title?: string;
+    description?: string;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+}
 
-export declare function FieldContent({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
-export declare function FieldDescription({ className, ...props }: React.ComponentProps<"p">): JSX.Element;
+export declare class ErrorBoundary extends React_2.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+    constructor(props: ErrorBoundaryProps);
+    static getDerivedStateFromError(error: Error): ErrorBoundaryState;
+    componentDidCatch(error: Error, errorInfo: React_2.ErrorInfo): void;
+    render(): string | number | bigint | boolean | Iterable<React_2.ReactNode> | Promise<string | number | bigint | boolean | React_2.ReactPortal | React_2.ReactElement<unknown, string | React_2.JSXElementConstructor<any>> | Iterable<React_2.ReactNode> | null | undefined> | JSX.Element | null | undefined;
+}
 
-export declare function FieldError({ className, children, errors, ...props }: React.ComponentProps<"div"> & {
+export declare interface ErrorBoundaryProps {
+    children: React_2.ReactNode;
+    fallback?: React_2.ComponentType<ErrorBoundaryState>;
+    onError?: (error: Error, errorInfo: React_2.ErrorInfo) => void;
+}
+
+export declare interface ErrorBoundaryState {
+    hasError: boolean;
+    error: Error | null;
+}
+
+export declare function Field({ className, orientation, ...props }: React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>): JSX.Element;
+
+export declare function FieldContent({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
+
+export declare function FieldDescription({ className, ...props }: React.ComponentProps<'p'>): JSX.Element;
+
+export declare function FieldError({ className, children, errors, ...props }: React.ComponentProps<'div'> & {
     errors?: Array<{
         message?: string;
     } | undefined>;
 }): JSX.Element | null;
 
-export declare function FieldGroup({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function FieldGroup({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
 export declare function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>): JSX.Element;
 
-export declare function FieldLegend({ className, variant, ...props }: React.ComponentProps<"legend"> & {
-    variant?: "legend" | "label";
+export declare function FieldLegend({ className, variant, ...props }: React.ComponentProps<'legend'> & {
+    variant?: 'legend' | 'label';
 }): JSX.Element;
 
-export declare function FieldSeparator({ children, className, ...props }: React.ComponentProps<"div"> & {
+export declare function FieldSeparator({ children, className, ...props }: React.ComponentProps<'div'> & {
     children?: React.ReactNode;
 }): JSX.Element;
 
-export declare function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">): JSX.Element;
+export declare function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>): JSX.Element;
 
-export declare function FieldTitle({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function FieldTitle({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
 declare const fieldVariants: (props?: ({
     orientation?: "horizontal" | "vertical" | "responsive" | null | undefined;
@@ -457,19 +583,67 @@ declare const fieldVariants: (props?: ({
 
 export declare const Form: <TFieldValues extends FieldValues, TContext = any, TTransformedValues = TFieldValues>(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) => React_2.JSX.Element;
 
+/**
+ * Format currency amount
+ * @example formatCurrency(1000000, 'vi-VN', 'VND') // '1.000.000 ₫'
+ */
+export declare function formatCurrency(amount: number, locale?: string, currency?: string): string;
+
+/**
+ * Format date using date-fns format or custom format
+ * @example formatDate(new Date(), 'short') // '01/01/2024'
+ */
+export declare function formatDate(date: Date | string | number, format?: DateFormat | string): string;
+
+/**
+ * Format file size in bytes to human readable format
+ * @example formatFileSize(1024) // '1 KB'
+ */
+export declare function formatFileSize(bytes: number): string;
+
+/**
+ * Format phone number
+ * @example formatPhoneNumber('0123456789') // '0123 456 789'
+ */
+export declare function formatPhoneNumber(phone: string): string;
+
 declare type FormatType = 'text' | 'integer' | 'decimal' | 'currency';
 
 export declare function FormControl({ ...props }: React_2.ComponentProps<typeof Slot>): JSX.Element;
 
-export declare function FormDescription({ className, ...props }: React_2.ComponentProps<"p">): JSX.Element;
+export declare function FormDescription({ className, ...props }: React_2.ComponentProps<'p'>): JSX.Element;
 
 export declare const FormField: <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({ ...props }: ControllerProps<TFieldValues, TName>) => JSX.Element;
 
-export declare function FormItem({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function FormItem({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function FormLabel({ className, ...props }: React_2.ComponentProps<typeof LabelPrimitive.Root>): JSX.Element;
 
-export declare function FormMessage({ className, ...props }: React_2.ComponentProps<"p">): JSX.Element | null;
+export declare function FormMessage({ className, ...props }: React_2.ComponentProps<'p'>): JSX.Element | null;
+
+/**
+ * Get nested object property by path string
+ * @example get({ user: { name: 'John' } }, 'user.name') // 'John'
+ */
+export declare function get<T = unknown>(obj: unknown, path: string): T | undefined;
+
+export declare function Grid({ className, cols, gap, responsive, ...props }: GridProps): JSX.Element;
+
+declare interface GridProps extends React_2.ComponentProps<'div'> {
+    cols?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
+    gap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12;
+    responsive?: {
+        sm?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
+        md?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
+        lg?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
+        xl?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
+    };
+}
+
+/**
+ * Check if value exists (not null, undefined, or empty string)
+ */
+export declare function hasValue(value: unknown): boolean;
 
 export declare function HoverCard({ ...props }: React_2.ComponentProps<typeof HoverCardPrimitive.Root>): JSX.Element;
 
@@ -479,62 +653,62 @@ export declare function HoverCardTrigger({ ...props }: React_2.ComponentProps<ty
 
 export declare function Input({ className, type, label, error, required, id, ...props }: InputProps): JSX.Element;
 
-export declare function InputGroup({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function InputGroup({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function InputGroupAddon({ className, align, ...props }: React_2.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>): JSX.Element;
+export declare function InputGroupAddon({ className, align, ...props }: React_2.ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>): JSX.Element;
 
 declare const inputGroupAddonVariants: (props?: ({
     align?: "inline-start" | "inline-end" | "block-start" | "block-end" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function InputGroupButton({ className, type, variant, size, ...props }: Omit<React_2.ComponentProps<typeof Button>, "size"> & VariantProps<typeof inputGroupButtonVariants>): JSX.Element;
+export declare function InputGroupButton({ className, type, variant, size, ...props }: Omit<React_2.ComponentProps<typeof Button>, 'size'> & VariantProps<typeof inputGroupButtonVariants>): JSX.Element;
 
 declare const inputGroupButtonVariants: (props?: ({
     size?: "sm" | "icon-sm" | "xs" | "icon-xs" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function InputGroupInput({ className, ...props }: React_2.ComponentProps<"input">): JSX.Element;
+export declare function InputGroupInput({ className, ...props }: React_2.ComponentProps<'input'>): JSX.Element;
 
-export declare function InputGroupText({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function InputGroupText({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
-export declare function InputGroupTextarea({ className, ...props }: React_2.ComponentProps<"textarea">): JSX.Element;
+export declare function InputGroupTextarea({ className, ...props }: React_2.ComponentProps<'textarea'>): JSX.Element;
 
 export declare function InputOTP({ className, containerClassName, ...props }: React_2.ComponentProps<typeof OTPInput> & {
     containerClassName?: string;
 }): JSX.Element;
 
-export declare function InputOTPGroup({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function InputOTPGroup({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function InputOTPSeparator({ ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function InputOTPSeparator({ ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function InputOTPSlot({ index, className, ...props }: React_2.ComponentProps<"div"> & {
+export declare function InputOTPSlot({ index, className, ...props }: React_2.ComponentProps<'div'> & {
     index: number;
 }): JSX.Element;
 
-declare interface InputProps extends Omit<React_2.ComponentProps<"input">, "type"> {
+declare interface InputProps extends Omit<React_2.ComponentProps<'input'>, 'type'> {
     label?: string | React_2.ReactNode;
     error?: string;
     required?: boolean;
-    type?: React_2.ComponentProps<"input">["type"];
+    type?: React_2.ComponentProps<'input'>['type'];
 }
 
-export declare function Item({ className, variant, size, asChild, ...props }: React_2.ComponentProps<"div"> & VariantProps<typeof itemVariants> & {
+export declare function Item({ className, variant, size, asChild, ...props }: React_2.ComponentProps<'div'> & VariantProps<typeof itemVariants> & {
     asChild?: boolean;
 }): JSX.Element;
 
-export declare function ItemActions({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemActions({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function ItemContent({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemContent({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function ItemDescription({ className, ...props }: React_2.ComponentProps<"p">): JSX.Element;
+export declare function ItemDescription({ className, ...props }: React_2.ComponentProps<'p'>): JSX.Element;
 
-export declare function ItemFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function ItemGroup({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemGroup({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function ItemHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function ItemMedia({ className, variant, ...props }: React_2.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>): JSX.Element;
+export declare function ItemMedia({ className, variant, ...props }: React_2.ComponentProps<'div'> & VariantProps<typeof itemMediaVariants>): JSX.Element;
 
 declare const itemMediaVariants: (props?: ({
     variant?: "image" | "default" | "icon" | null | undefined;
@@ -542,18 +716,32 @@ declare const itemMediaVariants: (props?: ({
 
 export declare function ItemSeparator({ className, ...props }: React_2.ComponentProps<typeof Separator>): JSX.Element;
 
-export declare function ItemTitle({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function ItemTitle({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 declare const itemVariants: (props?: ({
     variant?: "default" | "outline" | "muted" | null | undefined;
     size?: "default" | "sm" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function Kbd({ className, ...props }: React.ComponentProps<"kbd">): JSX.Element;
+export declare function Kbd({ className, ...props }: React.ComponentProps<'kbd'>): JSX.Element;
 
-export declare function KbdGroup({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function KbdGroup({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
 export declare function Label({ className, ...props }: React_2.ComponentProps<typeof LabelPrimitive.Root>): JSX.Element;
+
+export declare function LoadingButton({ className, loading, loadingText, children, disabled, ...props }: LoadingButtonProps): JSX.Element;
+
+declare interface LoadingButtonProps extends ComponentProps<typeof Button> {
+    loading?: boolean;
+    loadingText?: string;
+}
+
+export declare function LoadingState({ className, count, variant, ...props }: LoadingStateProps): JSX.Element;
+
+declare interface LoadingStateProps extends React_2.ComponentProps<'div'> {
+    count?: number;
+    variant?: 'default' | 'card' | 'list' | 'table';
+}
 
 export declare function Menubar({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Root>): JSX.Element;
 
@@ -565,7 +753,7 @@ export declare function MenubarGroup({ ...props }: React_2.ComponentProps<typeof
 
 export declare function MenubarItem({ className, inset, variant, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Item> & {
     inset?: boolean;
-    variant?: "default" | "destructive";
+    variant?: 'default' | 'destructive';
 }): JSX.Element;
 
 export declare function MenubarLabel({ className, inset, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Label> & {
@@ -582,7 +770,7 @@ export declare function MenubarRadioItem({ className, children, ...props }: Reac
 
 export declare function MenubarSeparator({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Separator>): JSX.Element;
 
-export declare function MenubarShortcut({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function MenubarShortcut({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
 export declare function MenubarSub({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Sub>): JSX.Element;
 
@@ -593,6 +781,8 @@ export declare function MenubarSubTrigger({ className, inset, children, ...props
 }): JSX.Element;
 
 export declare function MenubarTrigger({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Trigger>): JSX.Element;
+
+declare type NavigationDirection = 'horizontal' | 'vertical' | 'both';
 
 export declare function NavigationMenu({ className, children, viewport, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
     viewport?: boolean;
@@ -614,19 +804,19 @@ export declare const navigationMenuTriggerStyle: (props?: ClassProp | undefined)
 
 export declare function NavigationMenuViewport({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Viewport>): JSX.Element;
 
-export declare function Pagination({ className, ...props }: React_2.ComponentProps<"nav">): JSX.Element;
+export declare function Pagination({ className, ...props }: React_2.ComponentProps<'nav'>): JSX.Element;
 
-export declare function PaginationContent({ className, ...props }: React_2.ComponentProps<"ul">): JSX.Element;
+export declare function PaginationContent({ className, ...props }: React_2.ComponentProps<'ul'>): JSX.Element;
 
-export declare function PaginationEllipsis({ className, ...props }: React_2.ComponentProps<"span">): JSX.Element;
+export declare function PaginationEllipsis({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
 
-export declare function PaginationItem({ ...props }: React_2.ComponentProps<"li">): JSX.Element;
+export declare function PaginationItem({ ...props }: React_2.ComponentProps<'li'>): JSX.Element;
 
 export declare function PaginationLink({ className, isActive, size, ...props }: PaginationLinkProps): JSX.Element;
 
 declare type PaginationLinkProps = {
     isActive?: boolean;
-} & Pick<React_2.ComponentProps<typeof Button>, "size"> & React_2.ComponentProps<"a">;
+} & Pick<React_2.ComponentProps<typeof Button>, 'size'> & React_2.ComponentProps<'a'>;
 
 export declare function PaginationNext({ className, ...props }: React_2.ComponentProps<typeof PaginationLink>): JSX.Element;
 
@@ -646,6 +836,16 @@ export declare function RadioGroup({ className, ...props }: React_2.ComponentPro
 
 export declare function RadioGroupItem({ className, ...props }: React_2.ComponentProps<typeof RadioGroupPrimitive.Item>): JSX.Element;
 
+export declare const REGEX: {
+    readonly email: RegExp;
+    readonly phone: RegExp;
+    readonly vietnamesePhone: RegExp;
+    readonly url: RegExp;
+    readonly slug: RegExp;
+    readonly hexColor: RegExp;
+    readonly uuid: RegExp;
+};
+
 export declare function ResizableHandle({ withHandle, className, ...props }: React_2.ComponentProps<typeof Separator_2> & {
     withHandle?: boolean;
 }): JSX.Element;
@@ -654,6 +854,25 @@ export declare function ResizablePanel({ ...props }: React_2.ComponentProps<type
 
 export declare function ResizablePanelGroup({ className, ...props }: React_2.ComponentProps<typeof Group>): JSX.Element;
 
+export declare function RHFCheckboxGroup<T extends FieldValues = FieldValues>({ control, name, options, label, error, required, wrapperClassName, orientation, }: RHFCheckboxGroupProps<T>): JSX.Element;
+
+declare type RHFCheckboxGroupOption = {
+    value: string;
+    label: string;
+    disabled?: boolean;
+};
+
+declare type RHFCheckboxGroupProps<T extends FieldValues = FieldValues> = {
+    control: Control<T>;
+    name: Path<T>;
+    options: RHFCheckboxGroupOption[];
+    label?: string;
+    error?: string;
+    required?: boolean;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    orientation?: 'horizontal' | 'vertical';
+};
+
 export declare function RHFCombobox<T extends FieldValues = FieldValues>({ control, name, label, required, callback, className, ...comboboxProps }: RHFComboboxProps<T>): JSX.Element;
 
 declare type RHFComboboxProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Combobox>, 'value' | 'onChange' | 'label' | 'error' | 'required'> & {
@@ -661,7 +880,7 @@ declare type RHFComboboxProps<T extends FieldValues = FieldValues> = Omit<Compon
     name: Path<T>;
     label?: string;
     required?: boolean;
-    callback?: (newValue: string | number, newOption: ComboboxOption | undefined) => void;
+    callback?: (newValue: string, newOption: ComboboxOption | undefined) => void;
 };
 
 export declare function RHFDatePicker<T extends FieldValues = FieldValues>({ control, name, label, placeholder, required, error, disabled, disabledPast, disabledFuture, onDisabled, className, callback, ...calendarProps }: RHFDatePickerProps<T>): JSX.Element;
@@ -732,6 +951,39 @@ declare type RHFInputProps<T extends FieldValues = FieldValues> = Omit<Component
     required?: boolean;
 };
 
+export declare function RHFMultiSelect<T extends FieldValues = FieldValues>({ control, name, options, label, error, required, placeholder, wrapperClassName, }: RHFMultiSelectProps<T>): JSX.Element;
+
+declare type RHFMultiSelectOption = {
+    value: string;
+    label: string;
+    disabled?: boolean;
+};
+
+declare type RHFMultiSelectProps<T extends FieldValues = FieldValues> = {
+    control: Control<T>;
+    name: Path<T>;
+    options: RHFMultiSelectOption[];
+    label?: string;
+    error?: string;
+    required?: boolean;
+    placeholder?: string;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+};
+
+export declare function RHFNumberInput<T extends FieldValues = FieldValues>({ control, register, name, label, placeholder, className, wrapperClassName, required, min, max, step, ...rest }: RHFNumberInputProps<T>): JSX.Element;
+
+declare type RHFNumberInputProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Input>, 'label' | 'error' | 'required' | 'type'> & {
+    control: Control<T>;
+    name: Path<T>;
+    register: UseFormRegister<T>;
+    label?: string;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    required?: boolean;
+    min?: number;
+    max?: number;
+    step?: number;
+};
+
 export declare function RHFRadioGroup<T extends FieldValues = FieldValues>({ control, name, label, required, children, className, callback, onBeforeChange, ...radioGroupProps }: RHFRadioGroupProps<T>): JSX.Element;
 
 declare type RHFRadioGroupProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof RadioGroup>, 'onValueChange' | 'value'> & {
@@ -767,6 +1019,31 @@ declare type RHFTextAreaProps<T extends FieldValues = FieldValues> = Omit<Compon
     showMaxLength?: boolean;
 };
 
+export declare function RHFTimePicker<T extends FieldValues = FieldValues>({ control, register, name, label, placeholder, className, wrapperClassName, required, ...rest }: RHFTimePickerProps<T>): JSX.Element;
+
+declare type RHFTimePickerProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Input>, 'label' | 'error' | 'required' | 'type'> & {
+    control: Control<T>;
+    name: Path<T>;
+    register: UseFormRegister<T>;
+    label?: string;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    required?: boolean;
+};
+
+export declare function RHFUpload<T extends FieldValues = FieldValues>({ control, name, label, error, required, accept, multiple, wrapperClassName, className, }: RHFUploadProps<T>): JSX.Element;
+
+declare type RHFUploadProps<T extends FieldValues = FieldValues> = {
+    control: Control<T>;
+    name: Path<T>;
+    label?: string;
+    error?: string;
+    required?: boolean;
+    accept?: string;
+    multiple?: boolean;
+    wrapperClassName?: ComponentProps<'div'>['className'];
+    className?: ComponentProps<'input'>['className'];
+};
+
 export declare function ScrollArea({ className, children, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.Root>): JSX.Element;
 
 export declare function ScrollBar({ className, orientation, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>): JSX.Element;
@@ -788,7 +1065,7 @@ export declare function SelectScrollUpButton({ className, ...props }: React_2.Co
 export declare function SelectSeparator({ className, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Separator>): JSX.Element;
 
 export declare function SelectTrigger({ className, size, children, label, error, required, id, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Trigger> & {
-    size?: "sm" | "default";
+    size?: 'sm' | 'default';
     label?: string | React_2.ReactNode;
     error?: string;
     required?: boolean;
@@ -798,34 +1075,38 @@ export declare function SelectValue({ ...props }: React_2.ComponentProps<typeof 
 
 export declare function Separator({ className, orientation, decorative, ...props }: React_2.ComponentProps<typeof SeparatorPrimitive.Root>): JSX.Element;
 
+declare type SetValue<T> = React_2.Dispatch<React_2.SetStateAction<T>>;
+
+declare type SetValue_2<T> = React_2.Dispatch<React_2.SetStateAction<T>>;
+
 export declare function Sheet({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Root>): JSX.Element;
 
 export declare function SheetClose({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Close>): JSX.Element;
 
 export declare function SheetContent({ className, children, side, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Content> & {
-    side?: "top" | "right" | "bottom" | "left";
+    side?: 'top' | 'right' | 'bottom' | 'left';
 }): JSX.Element;
 
 export declare function SheetDescription({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Description>): JSX.Element;
 
-export declare function SheetFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SheetFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SheetHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SheetHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function SheetTitle({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Title>): JSX.Element;
 
 export declare function SheetTrigger({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Trigger>): JSX.Element;
 
-export declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React_2.ComponentProps<"div"> & {
-    side?: "left" | "right";
-    variant?: "sidebar" | "floating" | "inset";
-    collapsible?: "offcanvas" | "icon" | "none";
+export declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React_2.ComponentProps<'div'> & {
+    side?: 'left' | 'right';
+    variant?: 'sidebar' | 'floating' | 'inset';
+    collapsible?: 'offcanvas' | 'icon' | 'none';
 }): JSX.Element;
 
-export declare function SidebarContent({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarContent({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 declare type SidebarContextProps = {
-    state: "expanded" | "collapsed";
+    state: 'expanded' | 'collapsed';
     open: boolean;
     setOpen: (open: boolean) => void;
     openMobile: boolean;
@@ -834,36 +1115,36 @@ declare type SidebarContextProps = {
     toggleSidebar: () => void;
 };
 
-export declare function SidebarFooter({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SidebarGroup({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarGroup({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SidebarGroupAction({ className, asChild, ...props }: React_2.ComponentProps<"button"> & {
+export declare function SidebarGroupAction({ className, asChild, ...props }: React_2.ComponentProps<'button'> & {
     asChild?: boolean;
 }): JSX.Element;
 
-export declare function SidebarGroupContent({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarGroupContent({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SidebarGroupLabel({ className, asChild, ...props }: React_2.ComponentProps<"div"> & {
+export declare function SidebarGroupLabel({ className, asChild, ...props }: React_2.ComponentProps<'div'> & {
     asChild?: boolean;
 }): JSX.Element;
 
-export declare function SidebarHeader({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function SidebarInput({ className, ...props }: React_2.ComponentProps<typeof Input>): JSX.Element;
 
-export declare function SidebarInset({ className, ...props }: React_2.ComponentProps<"main">): JSX.Element;
+export declare function SidebarInset({ className, ...props }: React_2.ComponentProps<'main'>): JSX.Element;
 
-export declare function SidebarMenu({ className, ...props }: React_2.ComponentProps<"ul">): JSX.Element;
+export declare function SidebarMenu({ className, ...props }: React_2.ComponentProps<'ul'>): JSX.Element;
 
-export declare function SidebarMenuAction({ className, asChild, showOnHover, ...props }: React_2.ComponentProps<"button"> & {
+export declare function SidebarMenuAction({ className, asChild, showOnHover, ...props }: React_2.ComponentProps<'button'> & {
     asChild?: boolean;
     showOnHover?: boolean;
 }): JSX.Element;
 
-export declare function SidebarMenuBadge({ className, ...props }: React_2.ComponentProps<"div">): JSX.Element;
+export declare function SidebarMenuBadge({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SidebarMenuButton({ asChild, isActive, variant, size, tooltip, className, ...props }: React_2.ComponentProps<"button"> & {
+export declare function SidebarMenuButton({ asChild, isActive, variant, size, tooltip, className, ...props }: React_2.ComponentProps<'button'> & {
     asChild?: boolean;
     isActive?: boolean;
     tooltip?: string | React_2.ComponentProps<typeof TooltipContent>;
@@ -874,57 +1155,76 @@ declare const sidebarMenuButtonVariants: (props?: ({
     size?: "default" | "sm" | "lg" | null | undefined;
 } & ClassProp) | undefined) => string;
 
-export declare function SidebarMenuItem({ className, ...props }: React_2.ComponentProps<"li">): JSX.Element;
+export declare function SidebarMenuItem({ className, ...props }: React_2.ComponentProps<'li'>): JSX.Element;
 
-export declare function SidebarMenuSkeleton({ className, showIcon, ...props }: React_2.ComponentProps<"div"> & {
+export declare function SidebarMenuSkeleton({ className, showIcon, ...props }: React_2.ComponentProps<'div'> & {
     showIcon?: boolean;
 }): JSX.Element;
 
-export declare function SidebarMenuSub({ className, ...props }: React_2.ComponentProps<"ul">): JSX.Element;
+export declare function SidebarMenuSub({ className, ...props }: React_2.ComponentProps<'ul'>): JSX.Element;
 
-export declare function SidebarMenuSubButton({ asChild, size, isActive, className, ...props }: React_2.ComponentProps<"a"> & {
+export declare function SidebarMenuSubButton({ asChild, size, isActive, className, ...props }: React_2.ComponentProps<'a'> & {
     asChild?: boolean;
-    size?: "sm" | "md";
+    size?: 'sm' | 'md';
     isActive?: boolean;
 }): JSX.Element;
 
-export declare function SidebarMenuSubItem({ className, ...props }: React_2.ComponentProps<"li">): JSX.Element;
+export declare function SidebarMenuSubItem({ className, ...props }: React_2.ComponentProps<'li'>): JSX.Element;
 
-export declare function SidebarProvider({ defaultOpen, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }: React_2.ComponentProps<"div"> & {
+export declare function SidebarProvider({ defaultOpen, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }: React_2.ComponentProps<'div'> & {
     defaultOpen?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
 }): JSX.Element;
 
-export declare function SidebarRail({ className, ...props }: React_2.ComponentProps<"button">): JSX.Element;
+export declare function SidebarRail({ className, ...props }: React_2.ComponentProps<'button'>): JSX.Element;
 
 export declare function SidebarSeparator({ className, ...props }: React_2.ComponentProps<typeof Separator>): JSX.Element;
 
 export declare function SidebarTrigger({ className, onClick, ...props }: React_2.ComponentProps<typeof Button>): JSX.Element;
 
-export declare function Skeleton({ className, ...props }: React.ComponentProps<"div">): JSX.Element;
+export declare function Skeleton({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
 
 export declare function Slider({ className, defaultValue, value, min, max, ...props }: React_2.ComponentProps<typeof SliderPrimitive.Root>): JSX.Element;
 
-export declare function Spinner({ className, ...props }: React.ComponentProps<"svg">): JSX.Element;
+export declare function Spinner({ className, ...props }: React.ComponentProps<'svg'>): JSX.Element;
+
+export declare function Stack({ className, direction, spacing, align, justify, wrap, ...props }: StackProps): JSX.Element;
+
+declare interface StackProps extends React_2.ComponentProps<'div'> {
+    direction?: 'row' | 'column';
+    spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12;
+    align?: 'start' | 'center' | 'end' | 'stretch';
+    justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+    wrap?: boolean;
+}
+
+export declare function StatusBadge({ className, status, label, ...props }: StatusBadgeProps): JSX.Element;
+
+declare interface StatusBadgeProps extends React_2.ComponentProps<typeof Badge> {
+    status: StatusType;
+    label?: string;
+}
+
+export declare type StatusType = 'success' | 'error' | 'warning' | 'info' | 'pending' | 'default';
 
 export declare function Switch({ className, ...props }: React_2.ComponentProps<typeof SwitchPrimitive.Root>): JSX.Element;
 
-export declare function Table({ className, ...props }: React_2.ComponentProps<"table">): JSX.Element;
+export declare function Table({ className, ...props }: React_2.ComponentProps<'table'>): JSX.Element;
 
-export declare function TableBody({ className, ...props }: React_2.ComponentProps<"tbody">): JSX.Element;
+export declare function TableBody({ className, ...props }: React_2.ComponentProps<'tbody'>): JSX.Element;
 
-export declare function TableCaption({ className, ...props }: React_2.ComponentProps<"caption">): JSX.Element;
+export declare function TableCaption({ className, ...props }: React_2.ComponentProps<'caption'>): JSX.Element;
 
-export declare function TableCell({ className, ...props }: React_2.ComponentProps<"td">): JSX.Element;
+export declare function TableCell({ className, ...props }: React_2.ComponentProps<'td'>): JSX.Element;
 
-export declare function TableFooter({ className, ...props }: React_2.ComponentProps<"tfoot">): JSX.Element;
+export declare function TableFooter({ className, ...props }: React_2.ComponentProps<'tfoot'>): JSX.Element;
 
-export declare function TableHead({ className, ...props }: React_2.ComponentProps<"th">): JSX.Element;
+export declare function TableHead({ className, ...props }: React_2.ComponentProps<'th'>): JSX.Element;
 
-export declare function TableHeader({ className, ...props }: React_2.ComponentProps<"thead">): JSX.Element;
+export declare function TableHeader({ className, ...props }: React_2.ComponentProps<'thead'>): JSX.Element;
 
-export declare function TableRow({ className, ...props }: React_2.ComponentProps<"tr">): JSX.Element;
+export declare function TableRow({ className, ...props }: React_2.ComponentProps<'tr'>): JSX.Element;
 
 export declare function Tabs({ className, ...props }: React_2.ComponentProps<typeof TabsPrimitive.Root>): JSX.Element;
 
@@ -936,7 +1236,7 @@ export declare function TabsTrigger({ className, ...props }: React_2.ComponentPr
 
 export declare function Textarea({ className, label, error, required, id, ...props }: TextareaProps): JSX.Element;
 
-declare interface TextareaProps extends React_2.ComponentProps<"textarea"> {
+declare interface TextareaProps extends React_2.ComponentProps<'textarea'> {
     label?: string | React_2.ReactNode;
     error?: string;
     required?: boolean;
@@ -1031,7 +1331,43 @@ export declare function TooltipProvider({ delayDuration, ...props }: React_2.Com
 
 export declare function TooltipTrigger({ ...props }: React_2.ComponentProps<typeof TooltipPrimitive.Trigger>): JSX.Element;
 
+/**
+ * Truncate text with ellipsis
+ * @example truncate('Hello World', 5) // 'Hello...'
+ */
+export declare function truncate(text: string, maxLength: number, suffix?: string): string;
+
+export declare function useAriaLabel(options?: UseAriaLabelOptions): {
+    'aria-label': string | undefined;
+    'aria-labelledby': string | undefined;
+    'aria-describedby': string | undefined;
+};
+
+declare interface UseAriaLabelOptions {
+    label?: string;
+    labelledBy?: string;
+    describedBy?: string;
+}
+
+export declare function useBreakpoint(): Breakpoint | null;
+
 declare type UseCarouselParameters = Parameters<typeof default_2>;
+
+export declare function useClickOutside<T extends HTMLElement = HTMLElement>(ref: RefObject<T>, handler: (event: MouseEvent | TouchEvent) => void): void;
+
+export declare function useCopyToClipboard(): UseCopyToClipboardReturn;
+
+export declare interface UseCopyToClipboardReturn {
+    copy: (text: string) => Promise<boolean>;
+    copied: boolean;
+    error: Error | null;
+}
+
+export declare function useDebounce<T>(value: T, delay: number): T;
+
+export declare function useDebouncedCallback<T extends (...args: unknown[]) => unknown>(callback: T, delay: number): T;
+
+export declare function useFocusTrap<T extends HTMLElement = HTMLElement>(ref: RefObject<T>, enabled?: boolean): void;
 
 export declare const useFormField: () => {
     invalid: boolean;
@@ -1048,6 +1384,65 @@ export declare const useFormField: () => {
 
 export declare function useIsMobile(): boolean;
 
+export declare function useIsTablet(): boolean;
+
+export declare function useKeyboardNavigation(itemCount: number, options?: UseKeyboardNavigationOptions): {
+    currentIndex: number;
+    setCurrentIndex: React_2.Dispatch<React_2.SetStateAction<number>>;
+    handleKeyDown: (e: React_2.KeyboardEvent) => void;
+};
+
+declare interface UseKeyboardNavigationOptions {
+    direction?: NavigationDirection;
+    loop?: boolean;
+    onNavigate?: (index: number) => void;
+}
+
+export declare function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>, () => void];
+
+export declare function useMediaQuery(query: string): boolean;
+
+export declare function useMemoizedCallback<T extends (...args: unknown[]) => unknown>(callback: T, deps: DependencyList): T;
+
+export declare function usePrevious<T>(value: T): T | undefined;
+
+export declare function useSessionStorage<T>(key: string, initialValue: T): [T, SetValue_2<T>, () => void];
+
 export declare function useSidebar(): SidebarContextProps;
+
+export declare function useThrottle<T>(value: T, delay: number): T;
+
+export declare function useToggle(initialValue?: boolean): [boolean, () => void, React_2.Dispatch<React_2.SetStateAction<boolean>>];
+
+export declare function useWindowSize(): WindowSize;
+
+/**
+ * Validate email address
+ * @example validateEmail('test@example.com') // true
+ */
+export declare function validateEmail(email: string): boolean;
+
+/**
+ * Validate phone number (10-11 digits)
+ * @example validatePhone('0123456789') // true
+ */
+export declare function validatePhone(phone: string): boolean;
+
+/**
+ * Validate URL
+ * @example validateURL('https://example.com') // true
+ */
+export declare function validateURL(url: string): boolean;
+
+/**
+ * Validate Vietnamese phone number
+ * @example validateVietnamesePhone('0912345678') // true
+ */
+export declare function validateVietnamesePhone(phone: string): boolean;
+
+export declare interface WindowSize {
+    width: number;
+    height: number;
+}
 
 export { }

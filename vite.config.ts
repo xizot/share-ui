@@ -76,6 +76,7 @@ export default defineConfig(({ command, mode }) => {
             'react-day-picker',
             'react-hook-form',
             'date-fns',
+            '@tanstack/react-table',
             'react-resizable-panels',
             'recharts',
             'sonner',

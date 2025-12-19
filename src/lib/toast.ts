@@ -1,13 +1,13 @@
-import { toast as sonnerToast } from "sonner"
+import { toast as sonnerToast } from 'sonner';
 
 type ToastOptions = {
-  description?: string
-  duration?: number
+  description?: string;
+  duration?: number;
   action?: {
-    label: string
-    onClick: () => void
-  }
-}
+    label: string;
+    onClick: () => void;
+  };
+};
 
 /**
  * Toast utility functions for displaying notifications
@@ -21,7 +21,7 @@ export const toast = {
       description: options?.description,
       duration: options?.duration,
       action: options?.action,
-    })
+    });
   },
 
   /**
@@ -32,7 +32,7 @@ export const toast = {
       description: options?.description,
       duration: options?.duration,
       action: options?.action,
-    })
+    });
   },
 
   /**
@@ -43,7 +43,7 @@ export const toast = {
       description: options?.description,
       duration: options?.duration,
       action: options?.action,
-    })
+    });
   },
 
   /**
@@ -54,7 +54,7 @@ export const toast = {
       description: options?.description,
       duration: options?.duration,
       action: options?.action,
-    })
+    });
   },
 
   /**
@@ -65,51 +65,50 @@ export const toast = {
       description: options?.description,
       duration: options?.duration,
       action: options?.action,
-    })
+    });
   },
 
   /**
    * Show a loading toast
    */
-  loading: (message: string, options?: Omit<ToastOptions, "action">) => {
+  loading: (message: string, options?: Omit<ToastOptions, 'action'>) => {
     return sonnerToast.loading(message, {
       description: options?.description,
       duration: options?.duration,
-    })
+    });
   },
 
   /**
    * Show a promise toast (loading -> success/error)
    */
-  promise: <T,>(
+  promise: <T>(
     promise: Promise<T>,
     messages: {
-      loading: string
-      success: string | ((data: T) => string)
-      error: string | ((error: unknown) => string)
+      loading: string;
+      success: string | ((data: T) => string);
+      error: string | ((error: unknown) => string);
     },
-    options?: Omit<ToastOptions, "title" | "description">
+    options?: Omit<ToastOptions, 'title' | 'description'>,
   ) => {
     return sonnerToast.promise(promise, {
       loading: messages.loading,
       success: messages.success,
       error: messages.error,
       duration: options?.duration,
-    })
+    });
   },
 
   /**
    * Dismiss a toast by ID
    */
   dismiss: (toastId?: string | number) => {
-    sonnerToast.dismiss(toastId)
+    sonnerToast.dismiss(toastId);
   },
 
   /**
    * Dismiss all toasts
    */
   dismissAll: () => {
-    sonnerToast.dismiss()
+    sonnerToast.dismiss();
   },
-}
-
+};

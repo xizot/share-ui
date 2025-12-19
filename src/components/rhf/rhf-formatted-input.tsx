@@ -1,38 +1,38 @@
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import type { ComponentProps } from "react"
-import { Controller, useFormState } from "react-hook-form"
-import type { Control, FieldValues, Path } from "react-hook-form"
-import { get } from "@/lib/utils"
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import type { ComponentProps } from 'react';
+import { Controller, useFormState } from 'react-hook-form';
+import type { Control, FieldValues, Path } from 'react-hook-form';
+import { get } from '@/lib/utils';
 
-type FormatType = 'text' | 'integer' | 'decimal' | 'currency'
+type FormatType = 'text' | 'integer' | 'decimal' | 'currency';
 
 type RHFFormattedInputProps<T extends FieldValues = FieldValues> = Omit<
   ComponentProps<typeof Input>,
   'value' | 'onChange' | 'type' | 'label' | 'error' | 'required'
 > & {
-  control: Control<T>
-  name: Path<T>
-  label?: string
-  format?: FormatType
-  required?: boolean
-  wrapperClassName?: ComponentProps<'div'>['className']
-  callback?: (value: string) => void
-}
+  control: Control<T>;
+  name: Path<T>;
+  label?: string;
+  format?: FormatType;
+  required?: boolean;
+  wrapperClassName?: ComponentProps<'div'>['className'];
+  callback?: (value: string) => void;
+};
 
 const formatValue = (value: string, format: FormatType): string => {
-  if (format === 'text' || !value) return value
+  if (format === 'text' || !value) return value;
 
   if (format === 'integer' || format === 'currency') {
-    return value.replace(/\D/g, '')
+    return value.replace(/\D/g, '');
   }
 
   if (format === 'decimal') {
-    return value.replace(/[^\d.,]/g, '').replace(/\./g, ',')
+    return value.replace(/[^\d.,]/g, '').replace(/\./g, ',');
   }
 
-  return value
-}
+  return value;
+};
 
 export default function RHFFormattedInput<T extends FieldValues = FieldValues>({
   control,
@@ -44,8 +44,8 @@ export default function RHFFormattedInput<T extends FieldValues = FieldValues>({
   callback = () => {},
   ...inputProps
 }: RHFFormattedInputProps<T>) {
-  const formState = useFormState({ control, name })
-  const error = get<string>(formState.errors, `${name}.message`)
+  const formState = useFormState({ control, name });
+  const error = get<string>(formState.errors, `${name}.message`);
 
   return (
     <Controller
@@ -53,7 +53,7 @@ export default function RHFFormattedInput<T extends FieldValues = FieldValues>({
       name={name}
       render={({ field }) => {
         return (
-          <div className={cn("w-full", wrapperClassName)}>
+          <div className={cn('w-full', wrapperClassName)}>
             <Input
               {...inputProps}
               {...field}
@@ -63,15 +63,14 @@ export default function RHFFormattedInput<T extends FieldValues = FieldValues>({
               required={required}
               value={field.value || ''}
               onChange={(e) => {
-                const formatted = formatValue(e.target.value, format)
-                field.onChange(formatted)
-                callback(formatted)
+                const formatted = formatValue(e.target.value, format);
+                field.onChange(formatted);
+                callback(formatted);
               }}
             />
           </div>
-        )
+        );
       }}
     />
-  )
+  );
 }
-

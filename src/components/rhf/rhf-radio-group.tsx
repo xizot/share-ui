@@ -1,28 +1,28 @@
-import { Label } from "@/components/ui/label"
-import { RadioGroup } from "@/components/ui/radio-group"
-import { cn } from "@/lib/utils"
-import type { ComponentProps } from "react"
-import { Controller } from "react-hook-form"
-import type { Control, FieldPathValue, FieldValues, Path } from "react-hook-form"
+import { Label } from '@/components/ui/label';
+import { RadioGroup } from '@/components/ui/radio-group';
+import { cn } from '@/lib/utils';
+import type { ComponentProps } from 'react';
+import { Controller } from 'react-hook-form';
+import type { Control, FieldPathValue, FieldValues, Path } from 'react-hook-form';
 
 type RHFRadioGroupProps<T extends FieldValues = FieldValues> = Omit<
   ComponentProps<typeof RadioGroup>,
   'onValueChange' | 'value'
 > & {
-  control: Control<T>
-  name: Path<T>
-  label?: string
-  required?: boolean
-  children: React.ReactNode
+  control: Control<T>;
+  name: Path<T>;
+  label?: string;
+  required?: boolean;
+  children: React.ReactNode;
 
   onBeforeChange?: (
     newValue: string,
     currentValue: FieldPathValue<T, Path<T>>,
     onNextAction: () => void,
-  ) => void
+  ) => void;
 
-  callback?: (newValue: string) => void
-}
+  callback?: (newValue: string) => void;
+};
 
 export default function RHFRadioGroup<T extends FieldValues = FieldValues>({
   control,
@@ -37,16 +37,16 @@ export default function RHFRadioGroup<T extends FieldValues = FieldValues>({
 }: RHFRadioGroupProps<T>) {
   const handleChange = (newValue: string, field: FieldValues) => {
     const performChange = () => {
-      field.onChange(newValue)
-      callback(newValue)
-    }
+      field.onChange(newValue);
+      callback(newValue);
+    };
 
     if (onBeforeChange) {
-      onBeforeChange(newValue, field.value, performChange)
+      onBeforeChange(newValue, field.value, performChange);
     } else {
-      performChange()
+      performChange();
     }
-  }
+  };
 
   return (
     <Controller
@@ -69,7 +69,7 @@ export default function RHFRadioGroup<T extends FieldValues = FieldValues>({
               id={radioGroupProps.id || name}
               className={cn('flex flex-row gap-4', className)}
               onValueChange={(val) => {
-                handleChange(val, field)
+                handleChange(val, field);
               }}
               value={field.value?.toString()}
             >
@@ -77,9 +77,8 @@ export default function RHFRadioGroup<T extends FieldValues = FieldValues>({
             </RadioGroup>
             {error && <p className="text-xs text-destructive">{error.message}</p>}
           </div>
-        )
+        );
       }}
     />
-  )
+  );
 }
-

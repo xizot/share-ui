@@ -1,7 +1,7 @@
-import { DesignSystem } from '@/pages/DesignSystem'
+import { DesignSystem } from '@/pages/DesignSystem';
 
 function App() {
-  return <DesignSystem />
+  return <DesignSystem />;
 }
 
-export default App
+export default App;

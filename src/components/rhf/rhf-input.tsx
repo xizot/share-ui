@@ -1,18 +1,21 @@
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import { useFormState } from "react-hook-form"
-import type { ComponentProps } from "react"
-import type { Control, FieldValues, Path, UseFormRegister } from "react-hook-form"
-import { get } from "@/lib/utils"
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { useFormState } from 'react-hook-form';
+import type { ComponentProps } from 'react';
+import type { Control, FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { get } from '@/lib/utils';
 
-type RHFInputProps<T extends FieldValues = FieldValues> = Omit<ComponentProps<typeof Input>, 'label' | 'error' | 'required'> & {
-  control: Control<T>
-  name: Path<T>
-  register: UseFormRegister<T>
-  label?: string
-  wrapperClassName?: ComponentProps<'div'>['className']
-  required?: boolean
-}
+type RHFInputProps<T extends FieldValues = FieldValues> = Omit<
+  ComponentProps<typeof Input>,
+  'label' | 'error' | 'required'
+> & {
+  control: Control<T>;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  label?: string;
+  wrapperClassName?: ComponentProps<'div'>['className'];
+  required?: boolean;
+};
 
 export default function RHFInput<T extends FieldValues = FieldValues>({
   control,
@@ -25,8 +28,8 @@ export default function RHFInput<T extends FieldValues = FieldValues>({
   required = false,
   ...rest
 }: RHFInputProps<T>) {
-  const formState = useFormState({ control, name })
-  const error = get<string>(formState.errors, `${name}.message`)
+  const formState = useFormState({ control, name });
+  const error = get<string>(formState.errors, `${name}.message`);
 
   return (
     <div className={cn('w-full', wrapperClassName)}>
@@ -40,6 +43,5 @@ export default function RHFInput<T extends FieldValues = FieldValues>({
         placeholder={placeholder}
       />
     </div>
-  )
+  );
 }
-

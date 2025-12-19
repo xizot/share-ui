@@ -1,27 +1,27 @@
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { cn } from "@/lib/utils"
-import type { ComponentProps } from "react"
-import { Controller } from "react-hook-form"
-import type { Control, FieldPathValue, FieldValues, Path } from "react-hook-form"
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils';
+import type { ComponentProps } from 'react';
+import { Controller } from 'react-hook-form';
+import type { Control, FieldPathValue, FieldValues, Path } from 'react-hook-form';
 
 type RHFSwitchProps<T extends FieldValues = FieldValues> = Omit<
   ComponentProps<typeof Switch>,
   'checked' | 'onCheckedChange'
 > & {
-  control: Control<T>
-  name: Path<T>
-  label?: string
-  required?: boolean
+  control: Control<T>;
+  name: Path<T>;
+  label?: string;
+  required?: boolean;
 
   onBeforeChange?: (
     newValue: boolean,
     currentValue: FieldPathValue<T, Path<T>>,
     onNextAction: () => void,
-  ) => void
+  ) => void;
 
-  callback?: (newValue: boolean) => void
-}
+  callback?: (newValue: boolean) => void;
+};
 
 export default function RHFSwitch<T extends FieldValues = FieldValues>({
   control,
@@ -35,16 +35,16 @@ export default function RHFSwitch<T extends FieldValues = FieldValues>({
 }: RHFSwitchProps<T>) {
   const handleChange = (newValue: boolean, field: FieldValues) => {
     const performChange = () => {
-      field.onChange(newValue)
-      callback(newValue)
-    }
+      field.onChange(newValue);
+      callback(newValue);
+    };
 
     if (onBeforeChange) {
-      onBeforeChange(newValue, field.value, performChange)
+      onBeforeChange(newValue, field.value, performChange);
     } else {
-      performChange()
+      performChange();
     }
-  }
+  };
 
   return (
     <Controller
@@ -68,16 +68,15 @@ export default function RHFSwitch<T extends FieldValues = FieldValues>({
                 id={switchProps.id || name}
                 checked={!!field.value}
                 onCheckedChange={(val) => {
-                  handleChange(val, field)
+                  handleChange(val, field);
                 }}
               />
             </div>
 
             {error && <p className="text-xs text-destructive">{error.message}</p>}
           </div>
-        )
+        );
       }}
     />
-  )
+  );
 }
-

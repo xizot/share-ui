@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -10,17 +10,17 @@ export function cn(...inputs: ClassValue[]) {
  * @example get({ user: { name: 'John' } }, 'user.name') // 'John'
  */
 export function get<T = unknown>(obj: unknown, path: string): T | undefined {
-  const keys = path.split('.')
-  let result: unknown = obj
-  
+  const keys = path.split('.');
+  let result: unknown = obj;
+
   for (const key of keys) {
     if (result === null || result === undefined || typeof result !== 'object') {
-      return undefined
+      return undefined;
     }
-    result = (result as Record<string, unknown>)[key]
+    result = (result as Record<string, unknown>)[key];
   }
-  
-  return result as T
+
+  return result as T;
 }
 
 /**
@@ -28,11 +28,10 @@ export function get<T = unknown>(obj: unknown, path: string): T | undefined {
  */
 export function hasValue(value: unknown): boolean {
   if (value === null || value === undefined) {
-    return false
+    return false;
   }
   if (typeof value === 'string' && value.trim() === '') {
-    return false
+    return false;
   }
-  return true
+  return true;
 }
-
