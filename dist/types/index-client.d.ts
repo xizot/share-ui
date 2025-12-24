@@ -1,6 +1,14 @@
 import { ClassProp } from 'class-variance-authority/types';
+import { ComponentProps } from 'react';
+import { DateRange } from 'react-day-picker';
+import { DayButton } from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
+import { DayPickerRangeProps } from 'react-day-picker';
+import { DayPickerSingleProps } from 'react-day-picker';
 import { default as default_2 } from 'embla-carousel-react';
 import { JSX } from 'react/jsx-runtime';
+import { Locale } from 'date-fns';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
 import * as React_2 from 'react';
 import * as RechartsPrimitive from 'recharts';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
@@ -17,6 +25,12 @@ declare const buttonVariants: (props?: ({
     variant?: "default" | "destructive" | "link" | "secondary" | "outline" | "ghost" | null | undefined;
     size?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "2xl" | "icon" | "icon-xxs" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg" | "icon-xl" | "icon-xxl" | null | undefined;
 } & ClassProp) | undefined) => string;
+
+export declare function Calendar({ className, classNames, showOutsideDays, captionLayout, buttonVariant, formatters, components, ...props }: React_2.ComponentProps<typeof DayPicker> & {
+    buttonVariant?: React_2.ComponentProps<typeof Button>['variant'];
+}): JSX.Element;
+
+export declare function CalendarDayButton({ className, day, modifiers, ...props }: React_2.ComponentProps<typeof DayButton>): JSX.Element;
 
 export declare function Carousel({ orientation, opts, setApi, plugins, className, children, ...props }: React_2.ComponentProps<'div'> & CarouselProps): JSX.Element;
 
@@ -81,6 +95,66 @@ export declare function ChartTooltipContent({ active, payload, className, indica
     labelKey?: string;
 }): JSX.Element | null;
 
+export declare function DatePicker({ value, onChange, placeholder, dateFormat, showTime, timeOnly, mode, label, error, required, disabled, disabledPast, disabledFuture, onDisabled, size, className, triggerClassName, popoverClassName, locale, cancelText, applyText, monthNames, ...calendarProps }: DatePickerProps): JSX.Element;
+
+export declare type DatePickerProps = Omit<DayPickerSingleProps, 'selected' | 'onSelect' | 'mode' | 'required'> & {
+    value?: Date;
+    onChange?: (date: Date | undefined) => void;
+    placeholder?: string;
+    dateFormat?: string;
+    showTime?: boolean;
+    timeOnly?: boolean;
+    mode?: 'single' | 'month';
+    label?: string | React_2.ReactNode;
+    error?: string;
+    required?: boolean;
+    disabled?: boolean;
+    disabledPast?: boolean;
+    disabledFuture?: boolean;
+    onDisabled?: (date: Date) => boolean;
+    size?: FormSize;
+    className?: ComponentProps<'div'>['className'];
+    triggerClassName?: ComponentProps<typeof Button>['className'];
+    popoverClassName?: ComponentProps<typeof PopoverContent>['className'];
+    locale?: string | Locale;
+    cancelText?: string;
+    applyText?: string;
+    monthNames?: string[];
+};
+
+export declare function DateRangePicker({ value, onChange, placeholder, dateFormat, presets, showPresets, label, error, required, disabled, disabledPast, disabledFuture, onDisabled, size, className, triggerClassName, popoverClassName, locale, cancelText, applyText, ...calendarProps }: DateRangePickerProps): JSX.Element;
+
+export declare type DateRangePickerProps = Omit<DayPickerRangeProps, 'selected' | 'onSelect' | 'mode' | 'required'> & {
+    value?: DateRange;
+    onChange?: (range: DateRange | undefined) => void;
+    placeholder?: {
+        from?: string;
+        to?: string;
+    };
+    dateFormat?: string;
+    presets?: DateRangePreset[];
+    showPresets?: boolean;
+    label?: string | React_2.ReactNode;
+    error?: string;
+    required?: boolean;
+    disabled?: boolean;
+    disabledPast?: boolean;
+    disabledFuture?: boolean;
+    onDisabled?: (date: Date) => boolean;
+    size?: FormSize;
+    className?: ComponentProps<'div'>['className'];
+    triggerClassName?: ComponentProps<typeof Button>['className'];
+    popoverClassName?: ComponentProps<typeof PopoverContent>['className'];
+    locale?: string | Locale;
+    cancelText?: string;
+    applyText?: string;
+};
+
+export declare type DateRangePreset = {
+    label: string;
+    range: DateRange;
+};
+
 declare type FormSize = VariantProps<typeof formSizeVariants>['size'];
 
 /**
@@ -100,6 +174,25 @@ declare interface InputProps extends Omit<React_2.ComponentProps<'input'>, 'type
     type?: React_2.ComponentProps<'input'>['type'];
     size?: FormSize;
 }
+
+export declare function MonthPicker({ value, onChange, locale, monthNames, disabled, className, }: MonthPickerProps): JSX.Element;
+
+export declare type MonthPickerProps = {
+    value?: Date;
+    onChange: (date: Date | undefined) => void;
+    locale?: string | Locale;
+    monthNames?: string[];
+    disabled?: (date: Date) => boolean;
+    className?: string;
+};
+
+export declare function Popover({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Root>): JSX.Element;
+
+export declare function PopoverAnchor({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Anchor>): JSX.Element;
+
+export declare function PopoverContent({ className, align, sideOffset, ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Content>): JSX.Element;
+
+export declare function PopoverTrigger({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Trigger>): JSX.Element;
 
 declare function Separator({ className, orientation, decorative, ...props }: React_2.ComponentProps<typeof SeparatorPrimitive.Root>): JSX.Element;
 
@@ -192,6 +285,21 @@ export declare function SidebarTrigger({ className, onClick, ...props }: React_2
 declare const THEMES: {
     readonly light: "";
     readonly dark: ".dark";
+};
+
+export declare function TimePicker({ value, onChange, showSeconds, className }: TimePickerProps): JSX.Element;
+
+export declare type TimePickerProps = {
+    value: TimeValue;
+    onChange: (value: TimeValue) => void;
+    showSeconds?: boolean;
+    className?: string;
+};
+
+export declare type TimeValue = {
+    hour: string;
+    minute: string;
+    second: string;
 };
 
 export declare function ToggleGroup({ className, variant, size, spacing, children, ...props }: React_2.ComponentProps<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants> & {

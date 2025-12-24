@@ -289,14 +289,17 @@ function App() {
 
 ### Using Client Components
 
+#### Option 1: Direct Import (Recommended for Client Components)
+
 ```tsx
 'use client' // Required
 
-import { Carousel, Chart, Sidebar } from 'shared-ui/client'
+import { DatePicker, Carousel, Chart, Sidebar } from 'shared-ui/client'
 
 function MyPage() {
   return (
     <div>
+      <DatePicker value={new Date()} onChange={() => {}} />
       <Carousel>
         {/* Carousel content */}
       </Carousel>
@@ -308,6 +311,25 @@ function MyPage() {
   )
 }
 ```
+
+#### Option 2: Dynamic Import (No wrapper needed - Use in Server Components)
+
+```tsx
+// app/page.tsx (Server Component - no 'use client' needed!)
+import dynamic from 'next/dynamic'
+
+// Dynamic import với ssr: false - không cần wrapper!
+const DatePicker = dynamic(() => import('shared-ui/client').then(mod => ({ default: mod.DatePicker })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
+
+export default function Page() {
+  return <DatePicker value={new Date()} onChange={() => {}} />
+}
+```
+
+**Lưu ý**: Dynamic import chỉ hoạt động với Next.js. Với Vite hoặc Create React App, bạn vẫn cần thêm `'use client'` vào file của bạn.
 
 ## Available Components
 
