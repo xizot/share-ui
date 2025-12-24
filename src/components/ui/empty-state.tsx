@@ -1,14 +1,16 @@
-import * as React from 'react';
-import {
-  Empty,
-  EmptyHeader,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-  EmptyMedia,
-} from './empty';
-import { Button } from './button';
+'use client';
+
 import { cn } from '@/lib/utils';
+import * as React from 'react';
+import { Button } from './button';
+import {
+    Empty,
+    EmptyContent,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle,
+} from './empty';
 
 interface EmptyStateProps extends React.ComponentProps<typeof Empty> {
   icon?: React.ReactNode;
