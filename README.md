@@ -36,7 +36,7 @@ This library requires the following peer dependencies. You need to install them 
 npm install react react-dom
 
 # Optional peer dependencies (only if you use specific features)
-npm install react-hook-form date-fns react-day-picker @tanstack/react-table
+npm install react-hook-form date-fns react-day-picker @tanstack/react-table react-quill-new
 ```
 
 **Peer Dependencies:**
@@ -46,30 +46,111 @@ npm install react-hook-form date-fns react-day-picker @tanstack/react-table
 - `date-fns` ^2.0.0 || ^3.0.0 (optional - only for date pickers)
 - `react-day-picker` ^9.0.0 (optional - only for date pickers)
 - `@tanstack/react-table` ^8.0.0 || ^9.0.0 (optional - only for DataTable component)
+- `react-quill-new` (optional - only for RHFEditor component)
 
 ### Setup in Your Project
 
-This library uses **Tailwind CSS v4**. The CSS is already bundled, but you need to ensure your project is compatible:
-
-1. **If your project uses Tailwind CSS v4**:
-   - No additional setup needed! The styles are bundled with the library.
-   - Import the styles if needed: `import 'shared-ui/styles'`
-
-2. **If your project uses Tailwind CSS v3**:
-   - You may need to upgrade to v4, or
-   - Copy the CSS variables from `shared-ui/src/index.css` to your project's CSS file
-   - Update your `tailwind.config.js` to include the library:
-   ```js
-   module.exports = {
-     content: [
-       "./src/**/*.{js,ts,jsx,tsx}",
-       "./node_modules/shared-ui/dist/**/*.{js,mjs}", // Add this
-     ],
-     // ... rest of your config
-   }
+1. **Import CSS** (required):
+   ```tsx
+   // In your root layout or _app.tsx (Next.js) / main.tsx (Vite)
+   import 'shared-ui/styles.css'
    ```
 
+2. **Tailwind CSS Compatibility**:
+   - This library uses **Tailwind CSS v4**
+   - If your project uses Tailwind CSS v3, you may need to upgrade to v4
+   - Or copy the CSS variables from `shared-ui/src/index.css` to your project's CSS file
+
 3. **CSS Variables**: The library uses CSS variables for theming. Make sure your project has the same CSS variables defined, or copy them from `shared-ui/src/index.css`.
+
+## Quick Start
+
+### 1. Import CSS
+
+```tsx
+// In your root layout or _app.tsx (Next.js) / main.tsx (Vite)
+import 'shared-ui/styles.css'
+```
+
+### 2. Import Components
+
+The library is split into 3 entry points for optimal bundle size and server component compatibility:
+
+#### **Core Components** (Main Entry - Safe for Server Components)
+
+```tsx
+// ✅ Use in Server Components (Next.js App Router)
+import { Button, Input, Card, Label } from 'shared-ui'
+
+function ServerComponent() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Hello World</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button>Click me</Button>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+#### **Client Components** (Components with createContext)
+
+```tsx
+// ✅ Use in Client Components only
+'use client'
+import { Carousel, Chart, Sidebar, ToggleGroup } from 'shared-ui/client'
+
+function ClientComponent() {
+  return (
+    <Carousel>
+      {/* ... */}
+    </Carousel>
+  )
+}
+```
+
+#### **RHF Components** (React Hook Form)
+
+```tsx
+// ✅ Use in Client Components with react-hook-form
+'use client'
+import { useForm } from 'react-hook-form'
+import { RHFInput, RHFTextarea, Form } from 'shared-ui/rhf'
+
+function MyForm() {
+  const { control, register } = useForm()
+  
+  return (
+    <Form control={control}>
+      <RHFInput
+        control={control}
+        register={register}
+        name="email"
+        label="Email"
+      />
+    </Form>
+  )
+}
+```
+
+## Entry Points
+
+The library provides 3 entry points to optimize bundle size and ensure server component compatibility:
+
+| Entry Point | Path | Use Case | Components |
+|------------|------|----------|------------|
+| **Core** | `shared-ui` (main) | Server Components | Button, Input, Card, Label, Badge, Avatar, etc. |
+| **Client** | `shared-ui/client` | Client Components with Context | Carousel, Chart, Sidebar, ToggleGroup |
+| **RHF** | `shared-ui/rhf` | React Hook Form | RHFInput, RHFTextarea, Form, RHFEditor, etc. |
+
+### Why Separate Entry Points?
+
+- **Server Component Compatibility**: Core components don't use `createContext`, making them safe for Next.js Server Components
+- **Bundle Size Optimization**: Only import what you need
+- **Tree-shaking**: Better tree-shaking when components are separated
 
 ## Usage
 
@@ -132,8 +213,10 @@ function MyComponent() {
 ### Using RHF Components
 
 ```tsx
+'use client' // Required for RHF components
+
 import { useForm } from 'react-hook-form'
-import { RHFInput, RHFTextarea, RHFCombobox } from 'shared-ui'
+import { RHFInput, RHFTextarea, RHFCombobox, Form } from 'shared-ui/rhf'
 
 function MyForm() {
   const { control, register } = useForm({
@@ -150,7 +233,7 @@ function MyForm() {
   ]
 
   return (
-    <form>
+    <Form control={control}>
       <RHFInput
         control={control}
         register={register}
@@ -175,14 +258,21 @@ function MyForm() {
         label="Country"
         required
       />
-    </form>
+    </Form>
   )
 }
+```
+
+**Note**: If using `RHFEditor`, make sure to install `react-quill-new`:
+```bash
+npm install react-quill-new
 ```
 
 ### Using Toast Notifications
 
 ```tsx
+'use client' // Required for Toaster
+
 import { Toaster, toast } from 'shared-ui'
 
 function App() {
@@ -193,6 +283,28 @@ function App() {
         Show Toast
       </button>
     </>
+  )
+}
+```
+
+### Using Client Components
+
+```tsx
+'use client' // Required
+
+import { Carousel, Chart, Sidebar } from 'shared-ui/client'
+
+function MyPage() {
+  return (
+    <div>
+      <Carousel>
+        {/* Carousel content */}
+      </Carousel>
+      
+      <Chart config={chartConfig} data={data}>
+        {/* Chart content */}
+      </Chart>
+    </div>
   )
 }
 ```
@@ -241,6 +353,13 @@ function App() {
 - **RHFDatePicker** - Date picker with react-hook-form integration
 - **RHFDateRangePicker** - Date range picker with react-hook-form integration
 - **RHFFormattedInput** - Formatted input (integer, decimal, currency) with react-hook-form integration
+- **RHFEditor** - Rich text editor with react-hook-form integration (requires `react-quill-new`)
+- **RHFNumberInput** - Number input with react-hook-form integration
+- **RHFTimePicker** - Time picker with react-hook-form integration
+- **RHFCheckboxGroup** - Checkbox group with react-hook-form integration
+- **RHFMultiSelect** - Multi-select with react-hook-form integration
+- **RHFUpload** - File upload with react-hook-form integration
+- **RHFFileUpload** - File upload component with react-hook-form integration
 
 ### Feedback
 - **alert** - Alert messages
@@ -325,12 +444,19 @@ npm run type-check
 shared-ui/
 ├── src/
 │   ├── components/
-│   │   └── ui/          # All shadcn/ui components
+│   │   ├── ui/          # All shadcn/ui components
+│   │   └── rhf/         # React Hook Form components
 │   ├── lib/
 │   │   └── utils.ts     # Utility functions (cn)
 │   ├── hooks/           # Custom hooks
-│   └── index.ts         # Main export file
+│   ├── index-core.ts    # Core components (server-safe)
+│   ├── index-client.ts  # Client components (with createContext)
+│   └── index-rhf.ts     # RHF components
 ├── dist/                # Build output
+│   ├── index-core.mjs   # Core bundle
+│   ├── index-client.mjs # Client bundle
+│   ├── index-rhf.mjs    # RHF bundle
+│   └── style.css        # Styles
 ├── components.json       # shadcn/ui config
 └── package.json
 ```
@@ -353,11 +479,25 @@ shared-ui/
 
 1. **Import Styles First**
    ```tsx
-   import 'shared-ui/styles.css' // Import at the top of your entry file
-   import { Button } from 'shared-ui'
+   // In your root layout or _app.tsx (Next.js) / main.tsx (Vite)
+   import 'shared-ui/styles.css'
    ```
 
-2. **Tree-shaking**
+2. **Use Correct Entry Points**
+   ```tsx
+   // ✅ Server Components (Next.js)
+   import { Button, Input, Card } from 'shared-ui'
+   
+   // ✅ Client Components with Context
+   'use client'
+   import { Carousel, Chart } from 'shared-ui/client'
+   
+   // ✅ React Hook Form Components
+   'use client'
+   import { RHFInput, Form } from 'shared-ui/rhf'
+   ```
+
+3. **Tree-shaking**
    - Import only what you need to keep bundle size small
    ```tsx
    // ✅ Good - Tree-shakeable
@@ -367,16 +507,17 @@ shared-ui/
    import * as SharedUI from 'shared-ui'
    ```
 
-3. **Using RHF Components**
+4. **Using RHF Components**
    ```tsx
+   'use client' // Required
    import { useForm } from 'react-hook-form'
-   import { RHFInput, RHFTextarea } from 'shared-ui'
+   import { RHFInput, RHFTextarea, Form } from 'shared-ui/rhf'
    
    function MyForm() {
      const { control, register } = useForm()
      
      return (
-       <form>
+       <Form control={control}>
          <RHFInput
            control={control}
            register={register}
@@ -384,9 +525,14 @@ shared-ui/
            label="Email"
            required
          />
-       </form>
+       </Form>
      )
    }
+   ```
+   
+   **Note**: If using `RHFEditor`, install `react-quill-new`:
+   ```bash
+   npm install react-quill-new
    ```
 
 4. **Using Date Pickers**

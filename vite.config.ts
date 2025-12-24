@@ -94,6 +94,8 @@ export default defineConfig(({ command, mode }) => {
               'recharts',
               'sonner',
               'vaul',
+              'react-quill-new',
+              'react-quill-new/dist/quill.snow.css',
             ];
             return externals.includes(id);
           },
