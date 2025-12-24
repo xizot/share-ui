@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
         tailwindcss(),
         dts({
           include: ['src/**/*'],
-          exclude: ['src/**/*.test.*', 'src/**/*.spec.*', 'src/App.tsx', 'src/main.tsx', 'src/pages/**/*'],
+          exclude: ['src/**/*.test.*', 'src/**/*.spec.*', 'src/App.tsx', 'src/main.tsx', 'src/pages/**/*', 'src/styles.ts'],
           outDir: 'dist/types',
           rollupTypes: true,
           insertTypesEntry: true,
@@ -41,6 +41,7 @@ export default defineConfig(({ command, mode }) => {
             'index-rhf': resolve(__dirname, 'src/index-rhf.ts'),
             'index-client': resolve(__dirname, 'src/index-client.ts'),
             'index-core': resolve(__dirname, 'src/index-core.ts'),
+            'styles': resolve(__dirname, 'src/styles.ts'),
           },
           external: (id) => {
             // Exclude pages directory from library build
@@ -104,7 +105,13 @@ export default defineConfig(({ command, mode }) => {
               react: 'React',
               'react-dom': 'ReactDOM',
             },
-            assetFileNames: 'style.css',
+            assetFileNames: (assetInfo) => {
+              // Extract CSS from styles entry to style.css
+              if (assetInfo.name?.endsWith('.css')) {
+                return 'style.css';
+              }
+              return assetInfo.name || 'assets/[name]-[hash][extname]';
+            },
           },
         },
         cssCodeSplit: false,

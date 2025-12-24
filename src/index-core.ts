@@ -1,6 +1,3 @@
-// Import CSS - this ensures the CSS file is included in the build
-import './index.css';
-
 // Export only core components that don't use createContext
 // These are safe to use in server components
 export * from './components/ui/alert';

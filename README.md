@@ -499,10 +499,23 @@ shared-ui/
 
 ### Best Practices
 
-1. **Import Styles First**
+1. **Import Styles First** (Before your global.css to allow override)
    ```tsx
    // In your root layout or _app.tsx (Next.js) / main.tsx (Vite)
+   // Import shared-ui styles BEFORE your global.css to allow override
    import 'shared-ui/styles.css'
+   import './globals.css' // Your custom styles - can override shared-ui
+   ```
+   
+   **Override CSS Variables:**
+   ```css
+   /* In your globals.css or global.css */
+   :root {
+     /* Override shared-ui CSS variables */
+     --primary: 222.2 47.4% 11.2%;
+     --background: 0 0% 100%;
+     /* Your custom overrides will take precedence */
+   }
    ```
 
 2. **Use Correct Entry Points**
