@@ -4,7 +4,7 @@ import { jsx as a, jsxs as c, Fragment as Ce } from "react/jsx-runtime";
 import * as l from "react";
 import { useMemo as dt, useRef as lt, useCallback as ct } from "react";
 import * as W from "@radix-ui/react-accordion";
-import { ChevronDownIcon as ke, ChevronRight as ut, MoreHorizontal as me, ArrowLeft as mt, ArrowRight as ft, CheckIcon as Y, CircleIcon as fe, ChevronRightIcon as ee, MinusIcon as gt, X as pt, XCircle as bt, ChevronDown as xe, MoreHorizontalIcon as ht, ChevronLeftIcon as vt, ChevronsLeft as xt, ChevronsRight as wt, GripVerticalIcon as Nt, XIcon as yt, PanelLeftIcon as Ct, Loader2Icon as Se, OctagonXIcon as kt, TriangleAlertIcon as St, InfoIcon as zt, CircleCheckIcon as It, ArrowUp as Tt, ArrowDown as Dt, ArrowUpDown as Mt, AlertCircle as _t } from "lucide-react";
+import { ChevronDownIcon as ke, ChevronRight as ut, MoreHorizontal as me, ArrowRight as mt, ArrowLeft as ft, CheckIcon as Y, CircleIcon as fe, ChevronRightIcon as ee, MinusIcon as gt, X as pt, XCircle as bt, ChevronDown as xe, MoreHorizontalIcon as ht, ChevronLeftIcon as vt, ChevronsLeft as xt, ChevronsRight as wt, GripVerticalIcon as Nt, XIcon as yt, PanelLeftIcon as Ct, Loader2Icon as Se, OctagonXIcon as kt, TriangleAlertIcon as St, InfoIcon as zt, CircleCheckIcon as It, ArrowUp as Tt, ArrowDown as Dt, ArrowUpDown as Mt, AlertCircle as _t } from "lucide-react";
 import { cva as _ } from "class-variance-authority";
 import * as j from "@radix-ui/react-alert-dialog";
 import * as Et from "@radix-ui/react-aspect-ratio";
@@ -590,7 +590,7 @@ function Xr({
       onClick: d,
       ...n,
       children: [
-        /* @__PURE__ */ a(mt, {}),
+        /* @__PURE__ */ a(ft, {}),
         /* @__PURE__ */ a("span", { className: "sr-only", children: "Previous slide" })
       ]
     }
@@ -618,7 +618,7 @@ function qr({
       onClick: d,
       ...n,
       children: [
-        /* @__PURE__ */ a(ft, {}),
+        /* @__PURE__ */ a(mt, {}),
         /* @__PURE__ */ a("span", { className: "sr-only", children: "Next slide" })
       ]
     }

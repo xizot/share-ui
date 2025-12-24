@@ -1,18 +1,20 @@
+'use client';
+
 import { DEFAULT_PAGE_SIZE_OPTIONS } from '@/constants/common';
 import { cn } from '@/lib/utils';
 import { SelectGroup } from '@radix-ui/react-select';
 import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  type Cell,
-  type ColumnDef,
-  type FilterFn,
-  type HeaderGroup,
-  type PaginationOptions,
-  type PaginationState,
-  type Row,
-  type SortingState,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
+    type Cell,
+    type ColumnDef,
+    type FilterFn,
+    type HeaderGroup,
+    type PaginationOptions,
+    type PaginationState,
+    type Row,
+    type SortingState,
 } from '@tanstack/react-table';
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import * as React from 'react';
