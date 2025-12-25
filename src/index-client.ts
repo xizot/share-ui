@@ -8,6 +8,7 @@ export * from './components/ui/date-picker';
 export * from './components/ui/date-range-picker';
 export * from './components/ui/month-picker';
 export * from './components/ui/popover';
+export * from './components/ui/scroll-area';
 export * from './components/ui/sidebar';
 export * from './components/ui/time-picker';
 export * from './components/ui/toggle-group';

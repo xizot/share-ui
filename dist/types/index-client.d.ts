@@ -11,6 +11,7 @@ import { Locale } from 'date-fns';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import * as React_2 from 'react';
 import * as RechartsPrimitive from 'recharts';
+import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
@@ -193,6 +194,10 @@ export declare function PopoverAnchor({ ...props }: React_2.ComponentProps<typeo
 export declare function PopoverContent({ className, align, sideOffset, ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Content>): JSX.Element;
 
 export declare function PopoverTrigger({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Trigger>): JSX.Element;
+
+export declare function ScrollArea({ className, children, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.Root>): JSX.Element;
+
+export declare function ScrollBar({ className, orientation, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>): JSX.Element;
 
 declare function Separator({ className, orientation, decorative, ...props }: React_2.ComponentProps<typeof SeparatorPrimitive.Root>): JSX.Element;
 
