@@ -1,4 +1,7 @@
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { ClassProp } from 'class-variance-authority/types';
+import { ColumnDef } from '@tanstack/react-table';
 import { ComponentProps } from 'react';
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import { DateRange } from 'react-day-picker';
@@ -7,23 +10,69 @@ import { DayPicker } from 'react-day-picker';
 import { DayPickerRangeProps } from 'react-day-picker';
 import { DayPickerSingleProps } from 'react-day-picker';
 import { default as default_2 } from 'embla-carousel-react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Drawer as Drawer_2 } from 'vaul';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { FilterFn } from '@tanstack/react-table';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
 import { JSX } from 'react/jsx-runtime';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Locale } from 'date-fns';
+import * as MenubarPrimitive from '@radix-ui/react-menubar';
+import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
+import { PaginationOptions } from '@tanstack/react-table';
+import { PaginationState } from '@tanstack/react-table';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
+import * as ProgressPrimitive from '@radix-ui/react-progress';
 import * as React_2 from 'react';
 import * as RechartsPrimitive from 'recharts';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import * as SelectPrimitive from '@radix-ui/react-select';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import * as SheetPrimitive from '@radix-ui/react-dialog';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import * as TogglePrimitive from '@radix-ui/react-toggle';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { UseEmblaCarouselType } from 'embla-carousel-react';
 import { VariantProps } from 'class-variance-authority';
+
+export declare function Accordion({ ...props }: React_2.ComponentProps<typeof AccordionPrimitive.Root>): JSX.Element;
+
+export declare function AccordionContent({ className, children, ...props }: React_2.ComponentProps<typeof AccordionPrimitive.Content>): JSX.Element;
+
+export declare function AccordionItem({ className, ...props }: React_2.ComponentProps<typeof AccordionPrimitive.Item>): JSX.Element;
+
+export declare function AccordionTrigger({ className, children, ...props }: React_2.ComponentProps<typeof AccordionPrimitive.Trigger>): JSX.Element;
+
+export declare function AlertDialog({ ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Root>): JSX.Element;
+
+export declare function AlertDialogAction({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Action>): JSX.Element;
+
+export declare function AlertDialogCancel({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Cancel>): JSX.Element;
+
+export declare function AlertDialogContent({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Content>): JSX.Element;
+
+export declare function AlertDialogDescription({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Description>): JSX.Element;
+
+export declare function AlertDialogFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
+
+export declare function AlertDialogHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
+
+export declare function AlertDialogOverlay({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Overlay>): JSX.Element;
+
+export declare function AlertDialogPortal({ ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Portal>): JSX.Element;
+
+export declare function AlertDialogTitle({ className, ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Title>): JSX.Element;
+
+export declare function AlertDialogTrigger({ ...props }: React_2.ComponentProps<typeof AlertDialogPrimitive.Trigger>): JSX.Element;
+
+declare function Badge({ className, variant, asChild, ...props }: React_2.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & {
+    asChild?: boolean;
+}): JSX.Element;
+
+declare const badgeVariants: (props?: ({
+    variant?: "default" | "destructive" | "secondary" | "outline" | null | undefined;
+} & ClassProp) | undefined) => string;
 
 declare function Button({ className, variant, size, asChild, ...props }: React_2.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
@@ -115,7 +164,9 @@ export declare function ChartTooltipContent({ active, payload, className, indica
     labelKey?: string;
 }): JSX.Element | null;
 
-export declare function Combobox<TOptions extends readonly ComboboxBaseOption[]>({ options, value, onChange, label, error, required, placeholder, searchPlaceholder, emptyMessage, disabled, readonly, size, showClearIcon, showArrowIcon, suffix, className, triggerClassName, popoverClassName, }: ComboboxProps<TOptions>): JSX.Element;
+export { ColumnDef }
+
+export declare function Combobox<TOptions extends readonly ComboboxBaseOption[]>({ options, value, onChange, label, error, required, placeholder, searchPlaceholder, emptyMessage, disabled, readonly, size, showClearIcon, showArrowIcon, showSearch, suffix, className, triggerClassName, popoverClassName, }: ComboboxProps<TOptions>): JSX.Element;
 
 export declare type ComboboxBaseOption = {
     id: string;
@@ -143,6 +194,7 @@ export declare type ComboboxProps<TOptions extends readonly ComboboxBaseOption[]
     size?: FormSize;
     showClearIcon?: boolean;
     showArrowIcon?: boolean;
+    showSearch?: boolean;
     suffix?: React_2.ReactNode;
     className?: ComponentProps<'div'>['className'];
     triggerClassName?: ComponentProps<typeof Button>['className'];
@@ -150,6 +202,20 @@ export declare type ComboboxProps<TOptions extends readonly ComboboxBaseOption[]
 };
 
 export declare type ComboboxValue = string | number;
+
+export declare function ConfirmDialog({ open, onOpenChange, title, description, confirmText, cancelText, onConfirm, variant, loading, }: ConfirmDialogProps): JSX.Element;
+
+declare interface ConfirmDialogProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    title: string;
+    description?: string;
+    confirmText?: string;
+    cancelText?: string;
+    onConfirm: () => void | Promise<void>;
+    variant?: 'default' | 'destructive';
+    loading?: boolean;
+}
 
 export declare function ContextMenu({ ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Root>): JSX.Element;
 
@@ -187,6 +253,25 @@ export declare function ContextMenuSubTrigger({ className, inset, children, ...p
 }): JSX.Element;
 
 export declare function ContextMenuTrigger({ ...props }: React_2.ComponentProps<typeof ContextMenuPrimitive.Trigger>): JSX.Element;
+
+export declare function DataTable<T extends Record<string, unknown>>({ data, paginationOptions, columns, totalPages, searchable, searchPlaceholder, searchKey, emptyMessage, className, enableGlobalFilter, globalFilterFn, pagination, onRowClick, rowClassName, }: DataTableProps<T>): JSX.Element;
+
+declare interface DataTableProps<T extends Record<string, unknown>> {
+    data: T[];
+    columns: ColumnDef<T, unknown>[];
+    pagination: PaginationState;
+    paginationOptions: Pick<PaginationOptions, 'onPaginationChange' | 'rowCount'>;
+    totalPages?: number;
+    searchable?: boolean;
+    searchPlaceholder?: string;
+    searchKey?: keyof T | string;
+    emptyMessage?: string;
+    className?: string;
+    enableGlobalFilter?: boolean;
+    globalFilterFn?: FilterFn<T>;
+    onRowClick?: (row: T) => void;
+    rowClassName?: (row: T) => string;
+}
 
 export declare function DatePicker({ value, onChange, placeholder, dateFormat, showTime, timeOnly, mode, label, error, required, disabled, disabledPast, disabledFuture, onDisabled, size, className, triggerClassName, popoverClassName, locale, cancelText, applyText, monthNames, ...calendarProps }: DatePickerProps): JSX.Element;
 
@@ -247,6 +332,40 @@ export declare type DateRangePreset = {
     label: string;
     range: DateRange;
 };
+
+export declare function DeleteConfirmDialog({ open, onOpenChange, title, description, itemName, onConfirm, loading, }: DeleteConfirmDialogProps): JSX.Element;
+
+declare interface DeleteConfirmDialogProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    title?: string;
+    description?: string;
+    itemName?: string;
+    onConfirm: () => void | Promise<void>;
+    loading?: boolean;
+}
+
+export declare function Dialog({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Root>): JSX.Element;
+
+export declare function DialogClose({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Close>): JSX.Element;
+
+export declare function DialogContent({ className, children, showCloseButton, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Content> & {
+    showCloseButton?: boolean;
+}): JSX.Element;
+
+export declare function DialogDescription({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Description>): JSX.Element;
+
+export declare function DialogFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
+
+export declare function DialogHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
+
+export declare function DialogOverlay({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Overlay>): JSX.Element;
+
+export declare function DialogPortal({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Portal>): JSX.Element;
+
+export declare function DialogTitle({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Title>): JSX.Element;
+
+export declare function DialogTrigger({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Trigger>): JSX.Element;
 
 export declare function Drawer({ ...props }: React_2.ComponentProps<typeof Drawer_2.Root>): JSX.Element;
 
@@ -319,7 +438,37 @@ declare const emptyMediaVariants: (props?: ({
     variant?: "default" | "icon" | null | undefined;
 } & ClassProp) | undefined) => string;
 
+export declare function EmptyState({ className, icon, title, description, action, children, ...props }: EmptyStateProps): JSX.Element;
+
+declare interface EmptyStateProps extends React_2.ComponentProps<typeof Empty> {
+    icon?: React_2.ReactNode;
+    title?: string;
+    description?: string;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+}
+
 export declare function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
+
+export declare class ErrorBoundary extends React_2.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+    constructor(props: ErrorBoundaryProps);
+    static getDerivedStateFromError(error: Error): ErrorBoundaryState;
+    componentDidCatch(error: Error, errorInfo: React_2.ErrorInfo): void;
+    render(): string | number | bigint | boolean | JSX.Element | Iterable<React_2.ReactNode> | Promise<string | number | bigint | boolean | React_2.ReactPortal | React_2.ReactElement<unknown, string | React_2.JSXElementConstructor<any>> | Iterable<React_2.ReactNode> | null | undefined> | null | undefined;
+}
+
+export declare interface ErrorBoundaryProps {
+    children: React_2.ReactNode;
+    fallback?: React_2.ComponentType<ErrorBoundaryState>;
+    onError?: (error: Error, errorInfo: React_2.ErrorInfo) => void;
+}
+
+export declare interface ErrorBoundaryState {
+    hasError: boolean;
+    error: Error | null;
+}
 
 export declare function Field({ className, orientation, ...props }: React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>): JSX.Element;
 
@@ -432,6 +581,59 @@ declare const itemVariants: (props?: ({
 
 declare function Label({ className, ...props }: React_2.ComponentProps<typeof LabelPrimitive.Root>): JSX.Element;
 
+export declare function LoadingButton({ className, loading, loadingText, children, disabled, ...props }: LoadingButtonProps): JSX.Element;
+
+declare interface LoadingButtonProps extends ComponentProps<typeof Button> {
+    loading?: boolean;
+    loadingText?: string;
+}
+
+export declare function LoadingState({ className, count, variant, ...props }: LoadingStateProps): JSX.Element;
+
+declare interface LoadingStateProps extends React_2.ComponentProps<'div'> {
+    count?: number;
+    variant?: 'default' | 'card' | 'list' | 'table';
+}
+
+export declare function Menubar({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Root>): JSX.Element;
+
+export declare function MenubarCheckboxItem({ className, children, checked, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.CheckboxItem>): JSX.Element;
+
+export declare function MenubarContent({ className, align, alignOffset, sideOffset, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Content>): JSX.Element;
+
+export declare function MenubarGroup({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Group>): JSX.Element;
+
+export declare function MenubarItem({ className, inset, variant, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Item> & {
+    inset?: boolean;
+    variant?: 'default' | 'destructive';
+}): JSX.Element;
+
+export declare function MenubarLabel({ className, inset, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Label> & {
+    inset?: boolean;
+}): JSX.Element;
+
+export declare function MenubarMenu({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Menu>): JSX.Element;
+
+export declare function MenubarPortal({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Portal>): JSX.Element;
+
+export declare function MenubarRadioGroup({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.RadioGroup>): JSX.Element;
+
+export declare function MenubarRadioItem({ className, children, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.RadioItem>): JSX.Element;
+
+export declare function MenubarSeparator({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Separator>): JSX.Element;
+
+export declare function MenubarShortcut({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
+
+export declare function MenubarSub({ ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Sub>): JSX.Element;
+
+export declare function MenubarSubContent({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.SubContent>): JSX.Element;
+
+export declare function MenubarSubTrigger({ className, inset, children, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.SubTrigger> & {
+    inset?: boolean;
+}): JSX.Element;
+
+export declare function MenubarTrigger({ className, ...props }: React_2.ComponentProps<typeof MenubarPrimitive.Trigger>): JSX.Element;
+
 export declare function MonthPicker({ value, onChange, locale, monthNames, disabled, className, }: MonthPickerProps): JSX.Element;
 
 export declare type MonthPickerProps = {
@@ -477,6 +679,56 @@ export declare type MultipleComboboxProps<TOptions extends readonly MultipleComb
 
 export declare type MultipleComboboxValue = string[];
 
+export declare function NavigationMenu({ className, children, viewport, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
+    viewport?: boolean;
+}): JSX.Element;
+
+export declare function NavigationMenuContent({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Content>): JSX.Element;
+
+export declare function NavigationMenuIndicator({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Indicator>): JSX.Element;
+
+export declare function NavigationMenuItem({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Item>): JSX.Element;
+
+export declare function NavigationMenuLink({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Link>): JSX.Element;
+
+export declare function NavigationMenuList({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.List>): JSX.Element;
+
+export declare function NavigationMenuTrigger({ className, children, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Trigger>): JSX.Element;
+
+export declare const navigationMenuTriggerStyle: (props?: ClassProp | undefined) => string;
+
+export declare function NavigationMenuViewport({ className, ...props }: React_2.ComponentProps<typeof NavigationMenuPrimitive.Viewport>): JSX.Element;
+
+export declare function Pagination({ className, ...props }: React_2.ComponentProps<'nav'>): JSX.Element;
+
+export declare function PaginationContent({ className, ...props }: React_2.ComponentProps<'ul'>): JSX.Element;
+
+export declare function PaginationEllipsis({ className, ...props }: React_2.ComponentProps<'span'>): JSX.Element;
+
+export declare function PaginationItem({ ...props }: React_2.ComponentProps<'li'>): JSX.Element;
+
+export declare function PaginationLink({ className, isActive, disabled, size, ...props }: PaginationLinkProps): JSX.Element;
+
+declare type PaginationLinkProps = {
+    isActive?: boolean;
+    disabled?: boolean;
+} & Pick<React_2.ComponentProps<typeof Button>, 'size'> & React_2.ComponentProps<'a'>;
+
+export declare function PaginationNext({ className, ...props }: React_2.ComponentProps<typeof PaginationLink>): JSX.Element;
+
+export declare function PaginationPrevious({ className, ...props }: React_2.ComponentProps<typeof PaginationLink>): JSX.Element;
+
+export declare const PaginationRange: ({ currentPage, totalPages, pageSize, siblingCount, onPageChange, }: PaginationRangeProps) => JSX.Element;
+
+declare type PaginationRangeProps = {
+    currentPage: number;
+    totalPages: number;
+    pageSize: number;
+    siblingCount?: number;
+    isGroupButton?: boolean;
+    onPageChange: (pageIndex: number, pageSize: number) => void;
+};
+
 export declare function Popover({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Root>): JSX.Element;
 
 export declare function PopoverAnchor({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Anchor>): JSX.Element;
@@ -485,29 +737,56 @@ export declare function PopoverContent({ className, align, sideOffset, ...props 
 
 export declare function PopoverTrigger({ ...props }: React_2.ComponentProps<typeof PopoverPrimitive.Trigger>): JSX.Element;
 
+export declare function Progress({ className, value, ...props }: React_2.ComponentProps<typeof ProgressPrimitive.Root>): JSX.Element;
+
 export declare function ScrollArea({ className, children, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.Root>): JSX.Element;
 
 export declare function ScrollBar({ className, orientation, ...props }: React_2.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>): JSX.Element;
 
+export declare function Select({ ...props }: React_2.ComponentProps<typeof SelectPrimitive.Root>): JSX.Element;
+
+export declare function SelectContent({ className, children, position, align, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Content>): JSX.Element;
+
+export declare function SelectGroup({ ...props }: React_2.ComponentProps<typeof SelectPrimitive.Group>): JSX.Element;
+
+export declare function SelectItem({ className, children, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Item>): JSX.Element;
+
+export declare function SelectLabel({ className, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Label>): JSX.Element;
+
+export declare function SelectScrollDownButton({ className, ...props }: React_2.ComponentProps<typeof SelectPrimitive.ScrollDownButton>): JSX.Element;
+
+export declare function SelectScrollUpButton({ className, ...props }: React_2.ComponentProps<typeof SelectPrimitive.ScrollUpButton>): JSX.Element;
+
+export declare function SelectSeparator({ className, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Separator>): JSX.Element;
+
+export declare function SelectTrigger({ className, size, children, label, error, required, id, ...props }: React_2.ComponentProps<typeof SelectPrimitive.Trigger> & {
+    size?: FormSize;
+    label?: string | React_2.ReactNode;
+    error?: string;
+    required?: boolean;
+}): JSX.Element;
+
+export declare function SelectValue({ ...props }: React_2.ComponentProps<typeof SelectPrimitive.Value>): JSX.Element;
+
 declare function Separator({ className, orientation, decorative, ...props }: React_2.ComponentProps<typeof SeparatorPrimitive.Root>): JSX.Element;
 
-export declare function Sheet({ ...props }: React_2.ComponentProps<typeof SheetPrimitive.Root>): JSX.Element;
+export declare function Sheet({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Root>): JSX.Element;
 
-export declare function SheetClose({ ...props }: React_2.ComponentProps<typeof SheetPrimitive.Close>): JSX.Element;
+export declare function SheetClose({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Close>): JSX.Element;
 
-export declare function SheetContent({ className, children, side, ...props }: React_2.ComponentProps<typeof SheetPrimitive.Content> & {
+export declare function SheetContent({ className, children, side, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Content> & {
     side?: 'top' | 'right' | 'bottom' | 'left';
 }): JSX.Element;
 
-export declare function SheetDescription({ className, ...props }: React_2.ComponentProps<typeof SheetPrimitive.Description>): JSX.Element;
+export declare function SheetDescription({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Description>): JSX.Element;
 
 export declare function SheetFooter({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
 export declare function SheetHeader({ className, ...props }: React_2.ComponentProps<'div'>): JSX.Element;
 
-export declare function SheetTitle({ className, ...props }: React_2.ComponentProps<typeof SheetPrimitive.Title>): JSX.Element;
+export declare function SheetTitle({ className, ...props }: React_2.ComponentProps<typeof DialogPrimitive.Title>): JSX.Element;
 
-export declare function SheetTrigger({ ...props }: React_2.ComponentProps<typeof SheetPrimitive.Trigger>): JSX.Element;
+export declare function SheetTrigger({ ...props }: React_2.ComponentProps<typeof DialogPrimitive.Trigger>): JSX.Element;
 
 export declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React_2.ComponentProps<'div'> & {
     side?: 'left' | 'right';
@@ -594,6 +873,52 @@ export declare function SidebarRail({ className, ...props }: React_2.ComponentPr
 export declare function SidebarSeparator({ className, ...props }: React_2.ComponentProps<typeof Separator>): JSX.Element;
 
 export declare function SidebarTrigger({ className, onClick, ...props }: React_2.ComponentProps<typeof Button>): JSX.Element;
+
+export declare function Skeleton({ className, ...props }: React.ComponentProps<'div'>): JSX.Element;
+
+export declare function Spinner({ className, ...props }: React.ComponentProps<'svg'>): JSX.Element;
+
+export declare function StatusBadge({ className, status, label, ...props }: StatusBadgeProps): JSX.Element;
+
+declare interface StatusBadgeProps extends React_2.ComponentProps<typeof Badge> {
+    status: StatusType;
+    label?: string;
+}
+
+export declare type StatusType = 'success' | 'error' | 'warning' | 'info' | 'pending' | 'default';
+
+export declare function Table({ className, ...props }: React_2.ComponentProps<'table'>): JSX.Element;
+
+export declare function TableBody({ className, ...props }: React_2.ComponentProps<'tbody'>): JSX.Element;
+
+export declare function TableCaption({ className, ...props }: React_2.ComponentProps<'caption'>): JSX.Element;
+
+export declare function TableCell({ className, ...props }: React_2.ComponentProps<'td'>): JSX.Element;
+
+export declare function TableFooter({ className, ...props }: React_2.ComponentProps<'tfoot'>): JSX.Element;
+
+export declare function TableHead({ className, ...props }: React_2.ComponentProps<'th'>): JSX.Element;
+
+export declare function TableHeader({ className, ...props }: React_2.ComponentProps<'thead'>): JSX.Element;
+
+export declare function TableRow({ className, ...props }: React_2.ComponentProps<'tr'>): JSX.Element;
+
+export declare function Tabs({ className, ...props }: React_2.ComponentProps<typeof TabsPrimitive.Root>): JSX.Element;
+
+export declare function TabsContent({ className, ...props }: React_2.ComponentProps<typeof TabsPrimitive.Content>): JSX.Element;
+
+export declare function TabsList({ className, ...props }: React_2.ComponentProps<typeof TabsPrimitive.List>): JSX.Element;
+
+export declare function TabsTrigger({ className, ...props }: React_2.ComponentProps<typeof TabsPrimitive.Trigger>): JSX.Element;
+
+export declare function Textarea({ className, label, error, required, id, size, ...props }: TextareaProps): JSX.Element;
+
+declare interface TextareaProps extends React_2.ComponentProps<'textarea'> {
+    label?: string | React_2.ReactNode;
+    error?: string;
+    required?: boolean;
+    size?: FormSize;
+}
 
 declare const THEMES: {
     readonly light: "";

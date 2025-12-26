@@ -47,6 +47,7 @@ type ComboboxProps<TOptions extends readonly ComboboxBaseOption[]> = {
   size?: FormSize;
   showClearIcon?: boolean;
   showArrowIcon?: boolean;
+  showSearch?: boolean;
   suffix?: React.ReactNode;
   className?: ComponentProps<'div'>['className'];
   triggerClassName?: ComponentProps<typeof Button>['className'];
@@ -71,6 +72,7 @@ function Combobox<TOptions extends readonly ComboboxBaseOption[]>({
   size = 'md',
   showClearIcon = true,
   showArrowIcon = true,
+  showSearch = true,
   suffix,
   className,
   triggerClassName,
@@ -146,7 +148,7 @@ function Combobox<TOptions extends readonly ComboboxBaseOption[]>({
         align="start"
       >
         <Command>
-          <CommandInput placeholder={searchPlaceholder} />
+          {showSearch && <CommandInput placeholder={searchPlaceholder} />}
           <CommandList>
             <CommandEmpty>{emptyMessage}</CommandEmpty>
             <CommandGroup>
